@@ -72,28 +72,28 @@ include CMakeFiles/Engine.dir/flags.make
 CMakeFiles/Engine.dir/codegen:
 .PHONY : CMakeFiles/Engine.dir/codegen
 
-CMakeFiles/Engine.dir/Engine/Engine.cpp.o: CMakeFiles/Engine.dir/flags.make
-CMakeFiles/Engine.dir/Engine/Engine.cpp.o: /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Engine/Engine.cpp
-CMakeFiles/Engine.dir/Engine/Engine.cpp.o: CMakeFiles/Engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Engine.dir/Engine/Engine.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/Engine/Engine.cpp.o -MF CMakeFiles/Engine.dir/Engine/Engine.cpp.o.d -o CMakeFiles/Engine.dir/Engine/Engine.cpp.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Engine/Engine.cpp
+CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o: CMakeFiles/Engine.dir/flags.make
+CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o: /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp
+CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o: CMakeFiles/Engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o -MF CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d -o CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp
 
-CMakeFiles/Engine.dir/Engine/Engine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/Engine/Engine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Engine/Engine.cpp > CMakeFiles/Engine.dir/Engine/Engine.cpp.i
+CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp > CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.i
 
-CMakeFiles/Engine.dir/Engine/Engine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/Engine/Engine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Engine/Engine.cpp -o CMakeFiles/Engine.dir/Engine/Engine.cpp.s
+CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp -o CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s
 
 # Object files for target Engine
 Engine_OBJECTS = \
-"CMakeFiles/Engine.dir/Engine/Engine.cpp.o"
+"CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o"
 
 # External object files for target Engine
 Engine_EXTERNAL_OBJECTS =
 
-bin/libEngine.dylib: CMakeFiles/Engine.dir/Engine/Engine.cpp.o
+bin/libEngine.dylib: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o
 bin/libEngine.dylib: CMakeFiles/Engine.dir/build.make
 bin/libEngine.dylib: CMakeFiles/Engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library bin/libEngine.dylib"

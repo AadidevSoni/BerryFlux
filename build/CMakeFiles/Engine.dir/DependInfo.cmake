@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Engine/Engine.cpp" "CMakeFiles/Engine.dir/Engine/Engine.cpp.o" "gcc" "CMakeFiles/Engine.dir/Engine/Engine.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -142,53 +142,53 @@ Sandbox/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/build
 .PHONY : Sandbox/fast
 
-Engine/Engine.o: Engine/Engine.cpp.o
-.PHONY : Engine/Engine.o
+BerryFlux/src/BerryFlux/Application.o: BerryFlux/src/BerryFlux/Application.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Application.o
 
 # target to build an object file
-Engine/Engine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/Engine/Engine.cpp.o
-.PHONY : Engine/Engine.cpp.o
+BerryFlux/src/BerryFlux/Application.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Application.cpp.o
 
-Engine/Engine.i: Engine/Engine.cpp.i
-.PHONY : Engine/Engine.i
+BerryFlux/src/BerryFlux/Application.i: BerryFlux/src/BerryFlux/Application.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Application.i
 
 # target to preprocess a source file
-Engine/Engine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/Engine/Engine.cpp.i
-.PHONY : Engine/Engine.cpp.i
+BerryFlux/src/BerryFlux/Application.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Application.cpp.i
 
-Engine/Engine.s: Engine/Engine.cpp.s
-.PHONY : Engine/Engine.s
+BerryFlux/src/BerryFlux/Application.s: BerryFlux/src/BerryFlux/Application.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Application.s
 
 # target to generate assembly for a file
-Engine/Engine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/Engine/Engine.cpp.s
-.PHONY : Engine/Engine.cpp.s
+BerryFlux/src/BerryFlux/Application.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Application.cpp.s
 
-Sandbox/main.o: Sandbox/main.cpp.o
-.PHONY : Sandbox/main.o
+Sandbox/src/SandboxApp.o: Sandbox/src/SandboxApp.cpp.o
+.PHONY : Sandbox/src/SandboxApp.o
 
 # target to build an object file
-Sandbox/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o
-.PHONY : Sandbox/main.cpp.o
+Sandbox/src/SandboxApp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o
+.PHONY : Sandbox/src/SandboxApp.cpp.o
 
-Sandbox/main.i: Sandbox/main.cpp.i
-.PHONY : Sandbox/main.i
+Sandbox/src/SandboxApp.i: Sandbox/src/SandboxApp.cpp.i
+.PHONY : Sandbox/src/SandboxApp.i
 
 # target to preprocess a source file
-Sandbox/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/main.cpp.i
-.PHONY : Sandbox/main.cpp.i
+Sandbox/src/SandboxApp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.i
+.PHONY : Sandbox/src/SandboxApp.cpp.i
 
-Sandbox/main.s: Sandbox/main.cpp.s
-.PHONY : Sandbox/main.s
+Sandbox/src/SandboxApp.s: Sandbox/src/SandboxApp.cpp.s
+.PHONY : Sandbox/src/SandboxApp.s
 
 # target to generate assembly for a file
-Sandbox/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/main.cpp.s
-.PHONY : Sandbox/main.cpp.s
+Sandbox/src/SandboxApp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.s
+.PHONY : Sandbox/src/SandboxApp.cpp.s
 
 # Help Target
 help:
@@ -200,12 +200,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Engine"
 	@echo "... Sandbox"
-	@echo "... Engine/Engine.o"
-	@echo "... Engine/Engine.i"
-	@echo "... Engine/Engine.s"
-	@echo "... Sandbox/main.o"
-	@echo "... Sandbox/main.i"
-	@echo "... Sandbox/main.s"
+	@echo "... BerryFlux/src/BerryFlux/Application.o"
+	@echo "... BerryFlux/src/BerryFlux/Application.i"
+	@echo "... BerryFlux/src/BerryFlux/Application.s"
+	@echo "... Sandbox/src/SandboxApp.o"
+	@echo "... Sandbox/src/SandboxApp.i"
+	@echo "... Sandbox/src/SandboxApp.s"
 .PHONY : help
 
 

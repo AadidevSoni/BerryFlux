@@ -3,20 +3,22 @@ project(BerryFlux)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# output folder
+# output folders
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Engine library
+# ---------------- Engine ----------------
 add_library(Engine SHARED
-    Engine/Engine.cpp
+    BerryFlux/src/BerryFlux/Application.cpp
 )
 
-target_include_directories(Engine PUBLIC Engine)
+target_include_directories(Engine PUBLIC
+    BerryFlux/src
+)
 
-# Sandbox executable
+# ---------------- Sandbox ----------------
 add_executable(Sandbox
-    Sandbox/main.cpp
+    Sandbox/src/SandboxApp.cpp
 )
 
 target_link_libraries(Sandbox Engine)

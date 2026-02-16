@@ -1,1 +1,1 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o -o bin/Sandbox  -Wl,-rpath,/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/bin bin/libEngine.dylib
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o -o bin/Sandbox  -Wl,-rpath,/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/bin bin/libEngine.dylib

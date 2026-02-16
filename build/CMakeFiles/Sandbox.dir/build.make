@@ -72,28 +72,28 @@ include CMakeFiles/Sandbox.dir/flags.make
 CMakeFiles/Sandbox.dir/codegen:
 .PHONY : CMakeFiles/Sandbox.dir/codegen
 
-CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o: CMakeFiles/Sandbox.dir/flags.make
-CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o: /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/main.cpp
-CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o: CMakeFiles/Sandbox.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o -MF CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o.d -o CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/main.cpp
+CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: CMakeFiles/Sandbox.dir/flags.make
+CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/src/SandboxApp.cpp
+CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: CMakeFiles/Sandbox.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o -MF CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o.d -o CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/src/SandboxApp.cpp
 
-CMakeFiles/Sandbox.dir/Sandbox/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Sandbox.dir/Sandbox/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/main.cpp > CMakeFiles/Sandbox.dir/Sandbox/main.cpp.i
+CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/src/SandboxApp.cpp > CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.i
 
-CMakeFiles/Sandbox.dir/Sandbox/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Sandbox.dir/Sandbox/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/main.cpp -o CMakeFiles/Sandbox.dir/Sandbox/main.cpp.s
+CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/src/SandboxApp.cpp -o CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.s
 
 # Object files for target Sandbox
 Sandbox_OBJECTS = \
-"CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o"
+"CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o"
 
 # External object files for target Sandbox
 Sandbox_EXTERNAL_OBJECTS =
 
-bin/Sandbox: CMakeFiles/Sandbox.dir/Sandbox/main.cpp.o
+bin/Sandbox: CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o
 bin/Sandbox: CMakeFiles/Sandbox.dir/build.make
 bin/Sandbox: bin/libEngine.dylib
 bin/Sandbox: CMakeFiles/Sandbox.dir/link.txt
