@@ -10,10 +10,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # ---------------- Engine ----------------
 add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Application.cpp
+    BerryFlux/src/BerryFlux/Log.cpp
 )
 
 target_include_directories(Engine PUBLIC
     BerryFlux/src
+    BerryFlux/vendor/spdlog/include
 )
 
 # ---------------- Sandbox ----------------

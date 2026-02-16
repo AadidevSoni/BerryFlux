@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DEngine_EXPORTS
 
-CXX_INCLUDES = -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src
+CXX_INCLUDES = -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -fPIC
 

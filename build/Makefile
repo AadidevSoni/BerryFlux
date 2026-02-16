@@ -166,6 +166,30 @@ BerryFlux/src/BerryFlux/Application.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s
 .PHONY : BerryFlux/src/BerryFlux/Application.cpp.s
 
+BerryFlux/src/BerryFlux/Log.o: BerryFlux/src/BerryFlux/Log.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Log.o
+
+# target to build an object file
+BerryFlux/src/BerryFlux/Log.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Log.cpp.o
+
+BerryFlux/src/BerryFlux/Log.i: BerryFlux/src/BerryFlux/Log.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Log.i
+
+# target to preprocess a source file
+BerryFlux/src/BerryFlux/Log.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Log.cpp.i
+
+BerryFlux/src/BerryFlux/Log.s: BerryFlux/src/BerryFlux/Log.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Log.s
+
+# target to generate assembly for a file
+BerryFlux/src/BerryFlux/Log.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Log.cpp.s
+
 Sandbox/src/SandboxApp.o: Sandbox/src/SandboxApp.cpp.o
 .PHONY : Sandbox/src/SandboxApp.o
 
@@ -203,6 +227,9 @@ help:
 	@echo "... BerryFlux/src/BerryFlux/Application.o"
 	@echo "... BerryFlux/src/BerryFlux/Application.i"
 	@echo "... BerryFlux/src/BerryFlux/Application.s"
+	@echo "... BerryFlux/src/BerryFlux/Log.o"
+	@echo "... BerryFlux/src/BerryFlux/Log.i"
+	@echo "... BerryFlux/src/BerryFlux/Log.s"
 	@echo "... Sandbox/src/SandboxApp.o"
 	@echo "... Sandbox/src/SandboxApp.i"
 	@echo "... Sandbox/src/SandboxApp.s"

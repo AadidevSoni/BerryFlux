@@ -5,9 +5,15 @@ extern BerryFlux::Application* BerryFlux::CreateApplication();
 
 int main(int argc, char** argv)
 {
-  printf("BerryFlux Engine Starting\n");
+
+  BerryFlux::Log::Init();
+  //BerryFlux::Log::GetCoreLogger()->warn("Initialized Core Log!");
+  BF_CORE_WARN("Initialized Core Log!");
+  //BerryFlux::Log::GetClientLogger()->info("Initialized Client Log!");
+  int a = 10;
+  BF_INFO("Initialized Client Log! Var={0}",10);
+
   auto app = BerryFlux::CreateApplication();
   app->Run();
-  printf("BerryFlux Engine Closing\n");
   delete app;
 }
