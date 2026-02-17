@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include
 
-CXX_FLAGSarm64 = -std=gnu++17 -arch arm64
+CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -fPIE
 
-CXX_FLAGS = -std=gnu++17 -arch arm64
+CXX_FLAGS = -std=gnu++17 -arch arm64 -fPIE
 
