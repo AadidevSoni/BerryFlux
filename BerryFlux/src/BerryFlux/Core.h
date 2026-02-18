@@ -10,5 +10,5 @@
 
 #else
     // macOS / Linux → no export keyword needed
-    #define BERRYFLUX_API
+    #define BERRYFLUX_API //This makes the engine usable as a shared library.
 #endif

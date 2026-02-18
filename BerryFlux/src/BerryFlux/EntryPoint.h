@@ -6,7 +6,7 @@ extern BerryFlux::Application* BerryFlux::CreateApplication();
 int main(int argc, char** argv)
 {
 
-  BerryFlux::Log::Init();
+  BerryFlux::Log::Init(); //Engine boot sequence.
   //BerryFlux::Log::GetCoreLogger()->warn("Initialized Core Log!");
   BF_CORE_WARN("Initialized Core Log!");
   //BerryFlux::Log::GetClientLogger()->info("Initialized Client Log!");

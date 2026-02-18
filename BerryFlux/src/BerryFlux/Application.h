@@ -3,11 +3,12 @@
 #include "Core.h"
 
 namespace BerryFlux {
-  class BERRYFLUX_API Application
+  class BERRYFLUX_API Application //“Make this class visible outside the DLL” Without this, Sandbox couldn’t access engine classes.
   {
+    //Every game inherits from this.
     public:
       Application();
-      virtual ~Application();
+      virtual ~Application(); //Required for inheritance safety.
 
       void Run();
   };
