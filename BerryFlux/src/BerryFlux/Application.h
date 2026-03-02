@@ -1,6 +1,7 @@
 #pragma once 
 
 #include "Core.h"
+#include "Events/Event.h"
 
 namespace BerryFlux {
   class BERRYFLUX_API Application //“Make this class visible outside the DLL” Without this, Sandbox couldn’t access engine classes.
@@ -14,5 +15,5 @@ namespace BerryFlux {
   };
 
   //To be defined in Client
-  Application* CreateApplication();
+  Application* CreateApplication(); //Factory Pattern
 }

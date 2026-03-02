@@ -12,3 +12,5 @@
     // macOS / Linux → no export keyword needed
     #define BERRYFLUX_API //This makes the engine usable as a shared library.
 #endif
+
+#define BIT(x) (1 << x)
