@@ -9,7 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Application.cpp" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.cpp" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.cxx" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

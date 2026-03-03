@@ -1,9 +1,10 @@
 #pragma once
 
-#include "BerryFlux/Core.h"
-
 #include <string>
 #include <functional>
+#include <ostream>
+
+#include "BerryFlux/Core.h"
 
 namespace BerryFlux {
   //Event is blocking i.e, when an event occurs, it immediately gets dispatched and is dealth with right there

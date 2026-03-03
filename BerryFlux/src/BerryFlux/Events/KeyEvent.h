@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace BerryFlux {
 
   //Abstract event because we cant directly call this event as it has protected constructor

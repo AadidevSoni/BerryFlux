@@ -10,3 +10,9 @@ CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -fPIC
 
 CXX_FLAGS = -std=gnu++17 -arch arm64 -fPIC
 
+# PCH options: CMakeFiles/Engine.dir/cmake_pch.hxx.pch_OPTIONS = -Winvalid-pch;-Xclang;-emit-pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx;-x;c++-header
+
+# PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
+
+# PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
+

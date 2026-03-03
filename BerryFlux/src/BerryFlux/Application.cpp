@@ -1,3 +1,4 @@
+#include "bfpch.h"
 #include "Application.h"
 
 #include "BerryFlux/Events/ApplicationEvent.h"

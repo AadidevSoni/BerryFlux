@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o"
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
+  "CMakeFiles/Engine.dir/cmake_pch.hxx.pch"
+  "CMakeFiles/Engine.dir/cmake_pch.hxx.pch.d"
   "bin/libEngine.dylib"
   "bin/libEngine.pdb"
 )

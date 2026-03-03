@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace BerryFlux {
   class BERRYFLUX_API WindowResizeEvent : public Event {
     public:

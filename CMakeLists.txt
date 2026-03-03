@@ -15,6 +15,9 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Log.cpp
 )
 
+#Precompiled headers
+target_precompile_headers(Engine PRIVATE BerryFlux/src/bfpch.h)
+
 #PUBLIC means: Anyone linking this library gets these headers automatically So Sandbox inherits spdlog + engine headers.
 target_include_directories(Engine PUBLIC
     BerryFlux/src
