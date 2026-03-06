@@ -14,6 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "BerryFlux/Log.h"
+
 #if defined(_WIN32) || defined(_WIN64)
   #include <Windows.h>
 #endif

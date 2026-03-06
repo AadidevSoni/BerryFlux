@@ -718,6 +718,7 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/qos.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/sched.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/runetype.h
+ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sched.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h
  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdlib.h
@@ -838,6 +839,7 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/EntryPoint.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Events/Event.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h
+ /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/bfpch.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/common-inl.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/common.h
@@ -879,6 +881,4 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/spdlog.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/tweakme.h
  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/version.h
- /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Sandbox.dir/cmake_pch.hxx
- /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Sandbox.dir/cmake_pch.hxx.cxx
 

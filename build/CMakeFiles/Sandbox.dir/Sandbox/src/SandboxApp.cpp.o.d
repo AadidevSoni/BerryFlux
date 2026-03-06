@@ -777,12 +777,13 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/stack.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
-  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h \
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/bfpch.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_set \
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/spdlog.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/common.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/details/null_mutex.h \

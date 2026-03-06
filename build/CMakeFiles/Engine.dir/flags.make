@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DBF_BUILD_DLL -DBF_PLATFORM_MACOS -DEngine_EXPORTS
 
-CXX_INCLUDES = -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include
+CXX_INCLUDES = -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include -I/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/GLFW/include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -fPIC
 
@@ -15,4 +15,6 @@ CXX_FLAGS = -std=gnu++17 -arch arm64 -fPIC
 # PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
 
 # PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
+
+# PCH options: CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
 

@@ -142,6 +142,32 @@ Sandbox/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/build
 .PHONY : Sandbox/fast
 
+#=============================================================================
+# Target rules for targets named glfw
+
+# Build rule for target.
+glfw: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glfw
+.PHONY : glfw
+
+# fast build rule for target.
+glfw/fast:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build
+.PHONY : glfw/fast
+
+#=============================================================================
+# Target rules for targets named update_mappings
+
+# Build rule for target.
+update_mappings: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 update_mappings
+.PHONY : update_mappings
+
+# fast build rule for target.
+update_mappings/fast:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build
+.PHONY : update_mappings/fast
+
 BerryFlux/src/BerryFlux/Application.o: BerryFlux/src/BerryFlux/Application.cpp.o
 .PHONY : BerryFlux/src/BerryFlux/Application.o
 
@@ -190,6 +216,30 @@ BerryFlux/src/BerryFlux/Log.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.s
 .PHONY : BerryFlux/src/BerryFlux/Log.cpp.s
 
+BerryFlux/src/Platform/GLFWWindow.o: BerryFlux/src/Platform/GLFWWindow.cpp.o
+.PHONY : BerryFlux/src/Platform/GLFWWindow.o
+
+# target to build an object file
+BerryFlux/src/Platform/GLFWWindow.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o
+.PHONY : BerryFlux/src/Platform/GLFWWindow.cpp.o
+
+BerryFlux/src/Platform/GLFWWindow.i: BerryFlux/src/Platform/GLFWWindow.cpp.i
+.PHONY : BerryFlux/src/Platform/GLFWWindow.i
+
+# target to preprocess a source file
+BerryFlux/src/Platform/GLFWWindow.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.i
+.PHONY : BerryFlux/src/Platform/GLFWWindow.cpp.i
+
+BerryFlux/src/Platform/GLFWWindow.s: BerryFlux/src/Platform/GLFWWindow.cpp.s
+.PHONY : BerryFlux/src/Platform/GLFWWindow.s
+
+# target to generate assembly for a file
+BerryFlux/src/Platform/GLFWWindow.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.s
+.PHONY : BerryFlux/src/Platform/GLFWWindow.cpp.s
+
 Sandbox/src/SandboxApp.o: Sandbox/src/SandboxApp.cpp.o
 .PHONY : Sandbox/src/SandboxApp.o
 
@@ -237,14 +287,19 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... update_mappings"
 	@echo "... Engine"
 	@echo "... Sandbox"
+	@echo "... glfw"
 	@echo "... BerryFlux/src/BerryFlux/Application.o"
 	@echo "... BerryFlux/src/BerryFlux/Application.i"
 	@echo "... BerryFlux/src/BerryFlux/Application.s"
 	@echo "... BerryFlux/src/BerryFlux/Log.o"
 	@echo "... BerryFlux/src/BerryFlux/Log.i"
 	@echo "... BerryFlux/src/BerryFlux/Log.s"
+	@echo "... BerryFlux/src/Platform/GLFWWindow.o"
+	@echo "... BerryFlux/src/Platform/GLFWWindow.i"
+	@echo "... BerryFlux/src/Platform/GLFWWindow.s"
 	@echo "... Sandbox/src/SandboxApp.o"
 	@echo "... Sandbox/src/SandboxApp.i"
 	@echo "... Sandbox/src/SandboxApp.s"

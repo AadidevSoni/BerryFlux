@@ -49,7 +49,7 @@ namespace BerryFlux {
       int m_Button;
   };
 
-  class BERRYFLUX_API MouseButtonPressedEvent : public Event {
+  class BERRYFLUX_API MouseButtonPressedEvent : public MouseButtonEvent {
     public:
       MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
       std::string ToString() const override {
@@ -60,7 +60,7 @@ namespace BerryFlux {
       EVENT_CLASS_TYPE(MouseButtonPressed)
   };
 
-  class BERRYFLUX_API MouseButtonReleasedEvent : public Event {
+  class BERRYFLUX_API MouseButtonReleasedEvent : public MouseButtonEvent {
     public:
       MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
       std::string ToString() const override {

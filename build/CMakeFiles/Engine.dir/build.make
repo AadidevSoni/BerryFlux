@@ -119,10 +119,27 @@ CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xclang -include-pch -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.cpp -o CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.s
 
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o: CMakeFiles/Engine.dir/flags.make
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o: /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/Platform/GLFWWindow.cpp
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o: CMakeFiles/Engine.dir/cmake_pch.hxx
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o: CMakeFiles/Engine.dir/cmake_pch.hxx.pch
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o: CMakeFiles/Engine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xclang -include-pch -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx -MD -MT CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o -MF CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o.d -o CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/Platform/GLFWWindow.cpp
+
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xclang -include-pch -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx -E /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/Platform/GLFWWindow.cpp > CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.i
+
+CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xclang -include-pch -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch -Xclang -include -Xclang /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx -S /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/Platform/GLFWWindow.cpp -o CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.s
+
 # Object files for target Engine
 Engine_OBJECTS = \
 "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o" \
-"CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o"
+"CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o" \
+"CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o"
 
 # External object files for target Engine
 Engine_EXTERNAL_OBJECTS =
@@ -130,9 +147,11 @@ Engine_EXTERNAL_OBJECTS =
 bin/libEngine.dylib: CMakeFiles/Engine.dir/cmake_pch.hxx.pch
 bin/libEngine.dylib: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o
 bin/libEngine.dylib: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o
+bin/libEngine.dylib: CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o
 bin/libEngine.dylib: CMakeFiles/Engine.dir/build.make
+bin/libEngine.dylib: BerryFlux/vendor/GLFW/src/libglfw3.a
 bin/libEngine.dylib: CMakeFiles/Engine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library bin/libEngine.dylib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library bin/libEngine.dylib"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Engine.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -717,6 +717,7 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/qos.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/sched.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/runetype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sched.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdlib.h \
@@ -837,6 +838,7 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/EntryPoint.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Events/Event.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h \
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/bfpch.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/common-inl.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/common.h \
@@ -877,14 +879,8 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/spdlog-inl.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/spdlog.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/tweakme.h \
-  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/version.h \
-  CMakeFiles/Sandbox.dir/cmake_pch.hxx \
-  CMakeFiles/Sandbox.dir/cmake_pch.hxx.cxx
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/version.h
 
-
-CMakeFiles/Sandbox.dir/cmake_pch.hxx.cxx:
-
-CMakeFiles/Sandbox.dir/cmake_pch.hxx:
 
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/spdlog/include/spdlog/version.h:
 
@@ -944,6 +940,8 @@ CMakeFiles/Sandbox.dir/cmake_pch.hxx:
 
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/bfpch.h:
 
+/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h:
+
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h:
 
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Core.h:
@@ -995,10 +993,6 @@ CMakeFiles/Sandbox.dir/cmake_pch.hxx:
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_useconds_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uintptr_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/mem_fun_ref.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uid_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_in_addr_t.h:
 
@@ -1974,6 +1968,10 @@ CMakeFiles/Sandbox.dir/cmake_pch.hxx:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/function.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uid_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/mem_fun_ref.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/qos.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/wait.h:
@@ -2404,13 +2402,15 @@ CMakeFiles/Sandbox.dir/cmake_pch.hxx:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_strings.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/initializer_list:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sched.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_iterator.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/mismatch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/bounded_iter.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/initializer_list:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/min_element.h:
 

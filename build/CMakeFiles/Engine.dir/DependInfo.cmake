@@ -12,6 +12,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.cpp" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/Platform/GLFWWindow.cpp" "CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o.d"
+  "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o" "gcc" "CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o.d"
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.cxx" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch.d"
   "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch" "gcc" "CMakeFiles/Engine.dir/cmake_pch.hxx.pch.d"
   )

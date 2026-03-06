@@ -65,35 +65,77 @@ CMAKE_BINARY_DIR = /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build
 # The main recursive "all" target.
 all: CMakeFiles/Engine.dir/all
 all: CMakeFiles/Sandbox.dir/all
+all: BerryFlux/vendor/GLFW/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/Engine.dir/codegen
 codegen: CMakeFiles/Sandbox.dir/codegen
+codegen: BerryFlux/vendor/GLFW/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: BerryFlux/vendor/GLFW/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/Engine.dir/clean
 clean: CMakeFiles/Sandbox.dir/clean
+clean: BerryFlux/vendor/GLFW/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory BerryFlux/vendor/GLFW
+
+# Recursive "all" directory target.
+BerryFlux/vendor/GLFW/all: BerryFlux/vendor/GLFW/src/all
+.PHONY : BerryFlux/vendor/GLFW/all
+
+# Recursive "codegen" directory target.
+BerryFlux/vendor/GLFW/codegen: BerryFlux/vendor/GLFW/src/codegen
+.PHONY : BerryFlux/vendor/GLFW/codegen
+
+# Recursive "preinstall" directory target.
+BerryFlux/vendor/GLFW/preinstall: BerryFlux/vendor/GLFW/src/preinstall
+.PHONY : BerryFlux/vendor/GLFW/preinstall
+
+# Recursive "clean" directory target.
+BerryFlux/vendor/GLFW/clean: BerryFlux/vendor/GLFW/src/clean
+.PHONY : BerryFlux/vendor/GLFW/clean
+
+#=============================================================================
+# Directory level rules for directory BerryFlux/vendor/GLFW/src
+
+# Recursive "all" directory target.
+BerryFlux/vendor/GLFW/src/all: BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/all
+.PHONY : BerryFlux/vendor/GLFW/src/all
+
+# Recursive "codegen" directory target.
+BerryFlux/vendor/GLFW/src/codegen: BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/codegen
+.PHONY : BerryFlux/vendor/GLFW/src/codegen
+
+# Recursive "preinstall" directory target.
+BerryFlux/vendor/GLFW/src/preinstall:
+.PHONY : BerryFlux/vendor/GLFW/src/preinstall
+
+# Recursive "clean" directory target.
+BerryFlux/vendor/GLFW/src/clean: BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/clean
+BerryFlux/vendor/GLFW/src/clean: BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/clean
+.PHONY : BerryFlux/vendor/GLFW/src/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Engine.dir
 
 # All Build rule for target.
-CMakeFiles/Engine.dir/all:
+CMakeFiles/Engine.dir/all: BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=1,2,3,4 "Built target Engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target Engine"
 .PHONY : CMakeFiles/Engine.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Engine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 27
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Engine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 0
 .PHONY : CMakeFiles/Engine.dir/rule
@@ -105,7 +147,7 @@ Engine: CMakeFiles/Engine.dir/rule
 # codegen rule for target.
 CMakeFiles/Engine.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target Engine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=1,2,3,4,5 "Finished codegen for target Engine"
 .PHONY : CMakeFiles/Engine.dir/codegen
 
 # clean rule for target.
@@ -120,12 +162,12 @@ CMakeFiles/Engine.dir/clean:
 CMakeFiles/Sandbox.dir/all: CMakeFiles/Engine.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=5,6 "Built target Sandbox"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=6,7 "Built target Sandbox"
 .PHONY : CMakeFiles/Sandbox.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Sandbox.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 29
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Sandbox.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 0
 .PHONY : CMakeFiles/Sandbox.dir/rule
@@ -137,13 +179,77 @@ Sandbox: CMakeFiles/Sandbox.dir/rule
 # codegen rule for target.
 CMakeFiles/Sandbox.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=5,6 "Finished codegen for target Sandbox"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=6,7 "Finished codegen for target Sandbox"
 .PHONY : CMakeFiles/Sandbox.dir/codegen
 
 # clean rule for target.
 CMakeFiles/Sandbox.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Sandbox.dir/build.make CMakeFiles/Sandbox.dir/clean
 .PHONY : CMakeFiles/Sandbox.dir/clean
+
+#=============================================================================
+# Target rules for target BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir
+
+# All Build rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/all:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/depend
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Built target glfw"
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/all
+
+# Build rule for subdir invocation for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 22
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 0
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/rule
+
+# Convenience name for target.
+glfw: BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/rule
+.PHONY : glfw
+
+# codegen rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29 "Finished codegen for target glfw"
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/codegen
+
+# clean rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/clean:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/clean
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/glfw.dir/clean
+
+#=============================================================================
+# Target rules for target BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir
+
+# All Build rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/all:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/depend
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=30 "Built target update_mappings"
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/all
+
+# Build rule for subdir invocation for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 1
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles 0
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/rule
+
+# Convenience name for target.
+update_mappings: BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/rule
+.PHONY : update_mappings
+
+# codegen rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles --progress-num=30 "Finished codegen for target update_mappings"
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/codegen
+
+# clean rule for target.
+BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/clean:
+	$(MAKE) $(MAKESILENT) -f BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/build.make BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/clean
+.PHONY : BerryFlux/vendor/GLFW/src/CMakeFiles/update_mappings.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

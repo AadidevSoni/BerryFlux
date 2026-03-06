@@ -1405,3 +1405,132 @@ events:
       LTO support using: LLVM version 15.0.0 (static support for 29, runtime is 29)
       TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.3.2.2)
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "/opt/homebrew/share/cmake/Modules/FindThreads.cmake:160 (check_c_source_compiles)"
+      - "/opt/homebrew/share/cmake/Modules/FindThreads.cmake:226 (_threads_check_libc)"
+      - "BerryFlux/vendor/GLFW/CMakeLists.txt:64 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/CMakeScratch/TryCompile-Oskqcd"
+      binary: "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/CMakeScratch/TryCompile-Oskqcd"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/vendor/GLFW/CMake/modules"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/CMakeScratch/TryCompile-Oskqcd'
+        
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_30e1c/fast
+        /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_30e1c.dir/build.make CMakeFiles/cmTC_30e1c.dir/build
+        Building C object CMakeFiles/cmTC_30e1c.dir/src.c.o
+        /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -arch arm64 -fPIE -MD -MT CMakeFiles/cmTC_30e1c.dir/src.c.o -MF CMakeFiles/cmTC_30e1c.dir/src.c.o.d -o CMakeFiles/cmTC_30e1c.dir/src.c.o -c /Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/CMakeScratch/TryCompile-Oskqcd/src.c
+        Linking C executable cmTC_30e1c
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30e1c.dir/link.txt --verbose=1
+        /usr/bin/cc  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/cmTC_30e1c.dir/src.c.o -o cmTC_30e1c
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "CMakeLists.txt:41 (find_library)"
+    mode: "library"
+    variable: "OPENGL_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL"
+    candidate_directories:
+      - "/Users/aadidev/.opam/ocaml5/bin/"
+      - "/bin/"
+      - "/usr/bin/"
+      - "/sbin/"
+      - "/usr/sbin/"
+      - "/usr/local/bin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/aadidev/.npm-global/bin/"
+      - "/Users/aadidev/.console-ninja/.bin/"
+      - "/usr/local/mysql-9.4.0-macos15-arm64/bin/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/"
+      - "/opt/homebrew/lib/"
+      - "/opt/homebrew/"
+      - "/usr/local/lib/"
+      - "/usr/local/"
+      - "/usr/lib/"
+      - "/usr/"
+      - "/opt/"
+      - "/opt/local/lib/"
+      - "/opt/local/"
+      - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/"
+      - "/Library/Developer/CommandLineTools/Library/Frameworks/"
+      - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/"
+      - "/Library/Frameworks/"
+      - "/System/Library/Frameworks/"
+    found: "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework"
+    search_context:
+      ENV{PATH}:
+        - "/Users/aadidev/.opam/ocaml5/bin"
+        - "/bin"
+        - "/usr/bin"
+        - "/sbin"
+        - "/usr/sbin"
+        - "/usr/local/bin"
+        - "/opt/homebrew/bin"
+        - "/Users/aadidev/.npm-global/bin"
+        - "/Users/aadidev/.console-ninja/.bin"
+        - "/Users/aadidev/mongodb-macos-aarch64-8.0.10/bin"
+        - "/usr/local/mysql-9.4.0-macos15-arm64/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr"
+        - "/"
+        - "/opt/homebrew"
+        - "/usr/local"
+        - "/usr/X11R6"
+        - "/usr/pkg"
+        - "/opt"
+        - "/sw"
+        - "/opt/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/usr/lib/X11"
+      CMAKE_SYSTEM_FRAMEWORK_PATH:
+        - "~/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Network/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        - "/Library/Developer/CommandLineTools/Library/Frameworks"
+        - "/Applications/Xcode.app/Contents/Developer/Library/Frameworks"
+        - "/Library/Frameworks"
+        - "/Network/Library/Frameworks"
+        - "/System/Library/Frameworks"
+...
