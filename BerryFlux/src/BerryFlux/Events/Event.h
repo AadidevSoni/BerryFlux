@@ -31,12 +31,12 @@ namespace BerryFlux {
 
   //MACROS which makes it easier to assign the EventType and Name for each of the events
   //non instance needed if we want to know the type of event just from a pointer to the event
-#define EVENT_CLASS_TYPE(type) \
+  #define EVENT_CLASS_TYPE(type) \
     static EventType GetStaticType() { return EventType::type; } \
     virtual EventType GetEventType() const override { return GetStaticType(); } \
     virtual const char* GetName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+  #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
   //Base class for events
   class BERRYFLUX_API Event {
