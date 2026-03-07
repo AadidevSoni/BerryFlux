@@ -192,6 +192,54 @@ BerryFlux/src/BerryFlux/Application.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.s
 .PHONY : BerryFlux/src/BerryFlux/Application.cpp.s
 
+BerryFlux/src/BerryFlux/Layer.o: BerryFlux/src/BerryFlux/Layer.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Layer.o
+
+# target to build an object file
+BerryFlux/src/BerryFlux/Layer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/Layer.cpp.o
+
+BerryFlux/src/BerryFlux/Layer.i: BerryFlux/src/BerryFlux/Layer.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Layer.i
+
+# target to preprocess a source file
+BerryFlux/src/BerryFlux/Layer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/Layer.cpp.i
+
+BerryFlux/src/BerryFlux/Layer.s: BerryFlux/src/BerryFlux/Layer.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Layer.s
+
+# target to generate assembly for a file
+BerryFlux/src/BerryFlux/Layer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/Layer.cpp.s
+
+BerryFlux/src/BerryFlux/LayerStack.o: BerryFlux/src/BerryFlux/LayerStack.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.o
+
+# target to build an object file
+BerryFlux/src/BerryFlux/LayerStack.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.o
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.cpp.o
+
+BerryFlux/src/BerryFlux/LayerStack.i: BerryFlux/src/BerryFlux/LayerStack.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.i
+
+# target to preprocess a source file
+BerryFlux/src/BerryFlux/LayerStack.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.i
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.cpp.i
+
+BerryFlux/src/BerryFlux/LayerStack.s: BerryFlux/src/BerryFlux/LayerStack.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.s
+
+# target to generate assembly for a file
+BerryFlux/src/BerryFlux/LayerStack.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Engine.dir/build.make CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.s
+.PHONY : BerryFlux/src/BerryFlux/LayerStack.cpp.s
+
 BerryFlux/src/BerryFlux/Log.o: BerryFlux/src/BerryFlux/Log.cpp.o
 .PHONY : BerryFlux/src/BerryFlux/Log.o
 
@@ -294,6 +342,12 @@ help:
 	@echo "... BerryFlux/src/BerryFlux/Application.o"
 	@echo "... BerryFlux/src/BerryFlux/Application.i"
 	@echo "... BerryFlux/src/BerryFlux/Application.s"
+	@echo "... BerryFlux/src/BerryFlux/Layer.o"
+	@echo "... BerryFlux/src/BerryFlux/Layer.i"
+	@echo "... BerryFlux/src/BerryFlux/Layer.s"
+	@echo "... BerryFlux/src/BerryFlux/LayerStack.o"
+	@echo "... BerryFlux/src/BerryFlux/LayerStack.i"
+	@echo "... BerryFlux/src/BerryFlux/LayerStack.s"
 	@echo "... BerryFlux/src/BerryFlux/Log.o"
 	@echo "... BerryFlux/src/BerryFlux/Log.i"
 	@echo "... BerryFlux/src/BerryFlux/Log.s"

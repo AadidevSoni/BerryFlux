@@ -838,6 +838,8 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/EntryPoint.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Events/ApplicationEvent.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Events/Event.h \
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Layer.h \
+  /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/LayerStack.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h \
   /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/bfpch.h \
@@ -944,6 +946,8 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Window.h:
 
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Log.h:
+
+/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Layer.h:
 
 /Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/Events/ApplicationEvent.h:
 
@@ -1218,6 +1222,8 @@ CMakeFiles/Sandbox.dir/Sandbox/src/SandboxApp.cpp.o: /Users/aadidev/Desktop/Game
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cwctype:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/machine/_structs.h:
+
+/Users/aadidev/Desktop/GameEngineDev/BerryFlux/BerryFlux/src/BerryFlux/LayerStack.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cwchar:
 

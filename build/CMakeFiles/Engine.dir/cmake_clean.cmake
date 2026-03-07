@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o"
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Application.cpp.o.d"
+  "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.o"
+  "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.o.d"
+  "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.o"
+  "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.o.d"
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o"
   "CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Log.cpp.o.d"
   "CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o"

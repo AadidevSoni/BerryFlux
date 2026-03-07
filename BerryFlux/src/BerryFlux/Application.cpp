@@ -21,18 +21,39 @@ namespace BerryFlux {
 
   }
 
+  void Application::PushLayer(Layer* layer) {
+    m_LayerStack.PushLayer(layer);
+  }
+
+  void Application::PushOverlay(Layer* layer) {
+    m_LayerStack.PushOverlay(layer);
+  }
+
   void Application::OnEvent(Event& e) {
     EventDispatcher dispatcher(e);
     //If the event is a WindowCloseEvent, call OnWindowClose()
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose)); //If the Event e is a window close event
     //Prints every event being logged
-    //BF_CORE_TRACE("{0}",e.ToString()); //prints what kind of event it is and data set to
+    BF_CORE_TRACE("{0}",e.ToString()); //prints what kind of event it is and data set to
+
+    //Backward iteration for event handling
+    for(auto it = m_LayerStack.end();it != m_LayerStack.begin();) {
+      (*--it)->OnEvent(e); //*it Dereference it and gives the layer name
+      if(e.Handled) { //If an overlay ahndles an event then the layers wont get it
+        break;
+      }
+    }
   }
 
   void Application::Run() {
     while(m_Running) {
       glClearColor(1, 0, 1, 1);
       glClear(GL_COLOR_BUFFER_BIT);
+
+      for(Layer* layer: m_LayerStack) {
+        layer->OnUpdate();
+      }
+
       m_Window->OnUpdate();
     }
   }

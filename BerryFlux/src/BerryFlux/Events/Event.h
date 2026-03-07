@@ -43,6 +43,9 @@ namespace BerryFlux {
     friend class EventDispatcher;
 
     public:
+      virtual ~Event() = default;
+
+      bool Handled = false; //To see if the event has been handled or not as later when dispatched through layers, we have to see if the event has been handled so that layer underneath it doesnt receive that event
       virtual EventType GetEventType() const = 0;
       virtual const char* GetName() const = 0; //for debugging to get event name
       virtual int GetCategoryFlags() const = 0;
@@ -51,8 +54,6 @@ namespace BerryFlux {
       inline bool IsInCategory(EventCategory category) { //utility function to filter events based on category if 0 then not in category else in category
         return GetCategoryFlags() & category;
       }
-    protected:
-      bool m_Handled = false; //To see if the event has been handled or not as later when dispatched through layers, we have to see if the event has been handled so that layer underneath it doesnt receive that event
   };
 
   //Dispatch events based on their type
@@ -65,7 +66,7 @@ namespace BerryFlux {
       template<typename T>
       bool Dispatch(EventFn<T> func) { //function that takes in window resize event and returns a boolean
         if(m_Event.GetEventType() == T::GetStaticType()) {
-          m_Event.m_Handled = func(*(T*)&m_Event); //if the function matches, then we will call the event as we will go through every template or event type
+          m_Event.Handled = func(*(T*)&m_Event); //if the function matches, then we will call the event as we will go through every template or event type
           return true;
         }
         return false;

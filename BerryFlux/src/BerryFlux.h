@@ -2,6 +2,7 @@
 
 //For use by BerryFlux applications
 #include "BerryFlux/Application.h"
+#include "BerryFlux/Layer.h"
 #include "BerryFlux/Log.h"
 
 //Entry point

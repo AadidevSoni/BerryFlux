@@ -18,3 +18,7 @@ CXX_FLAGS = -std=gnu++17 -arch arm64 -fPIC
 
 # PCH options: CMakeFiles/Engine.dir/BerryFlux/src/Platform/GLFWWindow.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
 
+# PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/Layer.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
+
+# PCH options: CMakeFiles/Engine.dir/BerryFlux/src/BerryFlux/LayerStack.cpp.o_OPTIONS = -Winvalid-pch;-Xclang;-include-pch;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx.pch;-Xclang;-include;-Xclang;/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/CMakeFiles/Engine.dir/cmake_pch.hxx
+

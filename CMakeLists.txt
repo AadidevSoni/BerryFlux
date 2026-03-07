@@ -22,6 +22,8 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Application.cpp
     BerryFlux/src/BerryFlux/Log.cpp
     BerryFlux/src/Platform/GLFWWindow.cpp
+    BerryFlux/src/BerryFlux/Layer.cpp
+    BerryFlux/src/BerryFlux/LayerStack.cpp
 )
 
 #Precompiled headers
