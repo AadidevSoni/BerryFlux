@@ -1,0 +1,9 @@
+build/
+bin/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.o
+*.a
+*.dylib
+*.exe

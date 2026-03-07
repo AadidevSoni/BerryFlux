@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/cmake_install.cmake",
-		"/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/BerryFlux/vendor/GLFW/cmake_install.cmake",
-		"/Users/aadidev/Desktop/GameEngineDev/BerryFlux/build/BerryFlux/vendor/GLFW/src/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
