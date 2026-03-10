@@ -20,12 +20,19 @@ namespace BerryFlux {
 
       void PushLayer(Layer* layer);
       void PushOverlay(Layer* layer);
+
+      //To get the singleton reference from any part of the codebase
+      inline static Application& Get() { return *s_Instance;}
+
+      inline Window& GetWindow() {return *m_Window;}
     private:
       bool OnWindowClose(WindowCloseEvent& e);
       std::unique_ptr<Window> m_Window;
       bool m_Running = true;
 
       LayerStack m_LayerStack;
+    private:
+      static Application* s_Instance; //hold a singleton to our application as we can have only one application
   };
 
   //To be defined in Client

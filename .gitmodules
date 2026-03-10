@@ -4,3 +4,7 @@
 [submodule "BerryFlux/vendor/GLFW"]
 	path = BerryFlux/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "BerryFlux/vendor/imgui"]
+	path = BerryFlux/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking

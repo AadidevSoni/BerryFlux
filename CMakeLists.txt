@@ -8,13 +8,15 @@ set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin/$<CONFIG>)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 
-# ---------------- GLFW ----------------
+# ---------------- GLFW aand GLAD ----------------
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
-add_subdirectory(BerryFlux/vendor/GLFW)
+add_subdirectory(BerryFlux/vendor/GLFW) #add as subdirectory only if it has its own CMake
+add_subdirectory(BerryFlux/vendor/GLAD)
+add_subdirectory(BerryFlux/vendor/imgui)
 
 # ---------------- Engine ----------------
 # Builds BerryFlux as a shared library:
@@ -24,6 +26,7 @@ add_library(Engine SHARED
     BerryFlux/src/Platform/GLFWWindow.cpp
     BerryFlux/src/BerryFlux/Layer.cpp
     BerryFlux/src/BerryFlux/LayerStack.cpp
+    BerryFlux/src/BerryFlux/ImGui/ImGuiLayer.cpp
 )
 
 #Precompiled headers
@@ -33,10 +36,11 @@ target_precompile_headers(Engine PRIVATE BerryFlux/src/bfpch.h)
 target_include_directories(Engine PUBLIC
     BerryFlux/src
     BerryFlux/vendor/spdlog/include
+    BerryFlux/vendor/glad/include
 )
 
 #Link GLFW to Engine
-target_link_libraries(Engine PRIVATE glfw)
+target_link_libraries(Engine PRIVATE glfw glad ImGui)
 
 if(APPLE)
     target_compile_definitions(Engine PRIVATE BF_PLATFORM_MACOS BF_BUILD_DLL)

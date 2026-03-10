@@ -19,6 +19,7 @@ class Sandbox : public BerryFlux::Application {
   public:
     Sandbox() {
       PushLayer(new ExampleLayer());
+      PushOverlay(new BerryFlux::ImGuiLayer());
     }
 
     ~Sandbox() {
