@@ -66,6 +66,6 @@ namespace BerryFlux {
     ImGuiIO& io = ImGui::GetIO();
 
     event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-    event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+    event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard; //When typing in UI elements: the engine should ignore keyboard events.
   }
 }

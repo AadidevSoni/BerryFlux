@@ -22,3 +22,5 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+#define BF_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholder::_1)
