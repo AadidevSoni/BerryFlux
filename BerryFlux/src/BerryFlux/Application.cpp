@@ -5,6 +5,8 @@
 #define GL_SILENCE_DEPRECATION
 #include <OpenGL/gl3.h>
 
+#include "Input.h"
+
 namespace BerryFlux {
 
   //Call the function Application::x on this object and pass one argument when it is triggered.
@@ -59,6 +61,9 @@ namespace BerryFlux {
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate();
       }
+
+      auto[x,y] = Input::GetMousePosition();
+      BF_CORE_TRACE("{0}, {1}",x,y);
 
       m_Window->OnUpdate();
     }

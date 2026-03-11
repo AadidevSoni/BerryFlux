@@ -27,6 +27,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Layer.cpp
     BerryFlux/src/BerryFlux/LayerStack.cpp
     BerryFlux/src/BerryFlux/ImGui/ImGuiLayer.cpp
+    BerryFlux/src/Platform/WindowsInput.cpp
 )
 
 #Precompiled headers

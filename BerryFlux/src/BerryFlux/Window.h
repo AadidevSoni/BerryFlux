@@ -42,6 +42,9 @@ namespace BerryFlux {
       virtual void SetVSync(bool enabled) = 0;
       virtual bool IsVSync() const = 0;
 
+      //Returns the GLFW window and void as it can be any type of window 
+      virtual void* GetNativeWindow() const = 0;
+
       //Has to be implemented per platform
       //static here means: This function belongs to the class, not to an object. So you do not need a Window instance to call it.
       static Window* Create(const WindowProps& props = WindowProps());
