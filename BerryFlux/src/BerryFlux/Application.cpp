@@ -21,6 +21,10 @@ namespace BerryFlux {
 
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent)); //This event callback goes into the WindowData and calls OnEvent function
+  
+    m_ImGuiLayer = new ImGuiLayer();
+    //Adding to the layer stack
+    PushOverlay(m_ImGuiLayer);
   }
 
   Application::~Application() {
@@ -65,6 +69,12 @@ namespace BerryFlux {
       //Testing out Input Polling
       //auto[x,y] = Input::GetMousePosition();
       //BF_CORE_TRACE("{0}, {1}",x,y);
+
+      m_ImGuiLayer->Begin();
+      for(Layer* layer: m_LayerStack) {
+        layer->OnImGuiRender();
+      }
+      m_ImGuiLayer->End();
 
       m_Window->OnUpdate();
     }

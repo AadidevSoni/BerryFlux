@@ -3,7 +3,6 @@
 
 namespace BerryFlux {
   LayerStack::LayerStack() {
-    m_LayerInsert = m_Layers.begin();
   }
 
   LayerStack::~LayerStack() {
@@ -13,7 +12,8 @@ namespace BerryFlux {
   }
 
   void LayerStack::PushLayer(Layer* layer) {
-    m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer); //Insert before overlays. emplace() inserts efficiently.
+    m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer); //Insert before overlays. emplace() inserts efficiently.
+    m_LayerInsertIndex++;
   }
 
   void LayerStack::PushOverlay(Layer* overlay) {
@@ -24,7 +24,7 @@ namespace BerryFlux {
     auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
     if(it != m_Layers.end()) { //If found.
       m_Layers.erase(it); //Remove from vector.
-      m_LayerInsert--; //Move insert position back. Because one normal layer removed.
+      m_LayerInsertIndex--; //Move insert position back. Because one normal layer removed.
     }
   }
 

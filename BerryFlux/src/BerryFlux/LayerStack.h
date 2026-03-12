@@ -23,6 +23,7 @@ namespace BerryFlux {
       //vector because every frame, this will be iterated over. 
       //Layerstack is a wrapper around layers
       std::vector<Layer*> m_Layers; //Stores all layers
-      std::vector<Layer*>::iterator m_LayerInsert; //Marks where normal layers end and overlay starts as overlays always at end
+      // Old implementation std::vector<Layer*>::iterator m_LayerInsert; //Marks where normal layers end and overlay starts as overlays always at end
+      unsigned int m_LayerInsertIndex = 0;
   };
 }

@@ -9,10 +9,13 @@ namespace BerryFlux {
       ImGuiLayer();
       ~ImGuiLayer();
 
-      void OnAttach();
-      void OnDetach();
-      void OnUpdate();
-      void OnEvent(Event& event);
+      virtual void OnAttach() override;
+      virtual void OnDetach() override;
+      virtual void OnImGuiRender() override;
+
+      //For layers to do their own ImGui Rendering. Begin and end window renderign by different layers 
+      void Begin();
+      void End();
     private:
       float m_Time = 0.0f;
   };
