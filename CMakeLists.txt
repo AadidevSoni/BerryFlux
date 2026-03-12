@@ -17,6 +17,7 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(BerryFlux/vendor/GLFW) #add as subdirectory only if it has its own CMake
 add_subdirectory(BerryFlux/vendor/GLAD)
 add_subdirectory(BerryFlux/vendor/imgui)
+add_subdirectory(BerryFlux/vendor/glm)
 
 # ---------------- Engine ----------------
 # Builds BerryFlux as a shared library:
@@ -38,10 +39,11 @@ target_include_directories(Engine PUBLIC
     BerryFlux/src
     BerryFlux/vendor/spdlog/include
     BerryFlux/vendor/glad/include
+    BerryFlux/vendor/glm
 )
 
 #Link GLFW to Engine
-target_link_libraries(Engine PRIVATE glfw glad ImGui)
+target_link_libraries(Engine PRIVATE glfw glad ImGui glm)
 
 if(APPLE)
     target_compile_definitions(Engine PRIVATE BF_PLATFORM_MACOS BF_BUILD_DLL)
@@ -67,7 +69,8 @@ add_executable(Sandbox
 
 target_include_directories(Sandbox PRIVATE
     BerryFlux/src
-    BerryFlux/vendor/spdlog/include
+    BerryFlux/vendor/spdlog/include 
+    BerryFlux/vendor/glm/include
 )
 
 #Links engine to game.
