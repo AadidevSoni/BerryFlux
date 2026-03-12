@@ -62,8 +62,9 @@ namespace BerryFlux {
         layer->OnUpdate();
       }
 
-      auto[x,y] = Input::GetMousePosition();
-      BF_CORE_TRACE("{0}, {1}",x,y);
+      //Testing out Input Polling
+      //auto[x,y] = Input::GetMousePosition();
+      //BF_CORE_TRACE("{0}, {1}",x,y);
 
       m_Window->OnUpdate();
     }

@@ -5,11 +5,11 @@
 namespace BerryFlux {
   class BERRYFLUX_API Input {
     public:
-      inline static bool isKeyPressed(int keycode) {
+      inline static bool IsKeyPressed(int keycode) {
         return s_Instance->IsKeyPressedImpl(keycode);
       }
 
-      inline static bool isMouseButtonPressed(int button) {
+      inline static bool IsMouseButtonPressed(int button) {
         return s_Instance->IsMouseButtonPressedImpl(button);
       }
 

@@ -7,11 +7,22 @@ class ExampleLayer : public BerryFlux::Layer {
     }
 
     void OnUpdate() override {
-      BF_INFO("Example Layer::Update");
+      //BF_INFO("Example Layer::Update");
+
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_TAB)) {
+        BF_INFO("Tab key is pressed (poll)");
+      }
     }
 
     void OnEvent(BerryFlux::Event& event) override {
-      BF_TRACE("{0}", event.ToString());
+      //BF_TRACE("{0}", event.ToString());
+      if(event.GetEventType() == BerryFlux::EventType::KeyPressed) {
+        BerryFlux::KeyPressedEvent& e = (BerryFlux::KeyPressedEvent&)event;
+        BF_TRACE("{0}", (char)e.GetKeyCode());
+        if(e.GetKeyCode() == BF_KEY_TAB) {
+          BF_INFO("Tab key is pressed (event)");
+        }
+      }
     }
 };
 
