@@ -1,7 +1,9 @@
 #pragma once
 //Header file
 
-extern BerryFlux::Application* BerryFlux::CreateApplication();
+
+//extern - The symbol is defined in another translation unit
+extern BerryFlux::Application* BerryFlux::CreateApplication(); //Trust me — this function exists somewhere. You will find it during linking.
 
 int main(int argc, char** argv)
 {

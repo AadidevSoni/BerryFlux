@@ -1,12 +1,12 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
 #include "BerryFlux/Log.h"
 #include "GLFWWindow.h"
 #include "BerryFlux/Window.h"
 #include "BerryFlux/Events/ApplicationEvent.h"
 #include "BerryFlux/Events/MouseEvent.h"
 #include "BerryFlux/Events/KeyEvent.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace BerryFlux {
 
@@ -54,14 +54,11 @@ namespace BerryFlux {
       m_Data.Title.c_str(),
       nullptr,
       nullptr
-    );
+    );  
 
-    //This sets the window's OpenGL context as the current rendering context.
-    glfwMakeContextCurrent(m_Window);
-
-    //Initialize GLAD
-    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress); //Use GLFW’s glfwGetProcAddress to fetch all OpenGL function pointers.
-    BF_CORE_ASSERT(status, "Failed to initialize GLAD!");
+    //Creating and initializing the context
+    m_Context = new OpenGLContext(m_Window);
+    m_Context->Init(); 
 
     //GLFW callbacks are C-style functions, meaning they cannot access class members directly.So you attach your data to the window.
     // Later inside callbacks you can retrieve it:
@@ -159,7 +156,7 @@ namespace BerryFlux {
 
   void GLFWWindow::OnUpdate() {
     glfwPollEvents();
-    glfwSwapBuffers(m_Window); //Displays the rendered frame.
+    m_Context->SwapBuffers();
   }
 
   void GLFWWindow::SetVSync(bool enabled) {

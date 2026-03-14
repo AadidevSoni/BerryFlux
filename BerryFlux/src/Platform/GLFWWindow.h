@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include "BerryFlux/Window.h"
 
+#include "BerryFlux/Renderer/GraphicsContext.h"
+
 struct GLFWwinddw;
 
 namespace BerryFlux {
@@ -34,6 +36,7 @@ namespace BerryFlux {
     private:
       //This is the actual window created by GLFW.
       GLFWwindow* m_Window;
+      GraphicsContext* m_Context;
 
       //Store actual data that might be requested by GLFW during event callback
       struct WindowData {
