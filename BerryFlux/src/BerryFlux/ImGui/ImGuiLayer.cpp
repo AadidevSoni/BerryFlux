@@ -45,7 +45,7 @@ namespace BerryFlux {
 
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
-		ImGui_ImplOpenGL3_Init("#version 120");
+		ImGui_ImplOpenGL3_Init("#version 410");
   }
 
   void ImGuiLayer::OnDetach() 

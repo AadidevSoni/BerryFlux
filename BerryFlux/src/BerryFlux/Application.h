@@ -34,6 +34,9 @@ namespace BerryFlux {
       bool m_Running = true;
 
       LayerStack m_LayerStack;
+
+      unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+      unsigned int m_ShaderProgram;
     private:
       static Application* s_Instance; //hold a singleton to our application as we can have only one application
   };

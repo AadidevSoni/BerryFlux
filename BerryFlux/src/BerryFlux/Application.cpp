@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "BerryFlux/Log.h"
 
-#define GL_SILENCE_DEPRECATION
-#include <OpenGL/gl3.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include "Input.h"
 
@@ -25,6 +25,75 @@ namespace BerryFlux {
     m_ImGuiLayer = new ImGuiLayer();
     //Adding to the layer stack
     PushOverlay(m_ImGuiLayer);
+    
+    //Vertex array
+    glGenVertexArrays(1, &m_VertexArray);
+    glBindVertexArray(m_VertexArray);
+
+    //Vertex buffer
+    glGenBuffers(1, &m_VertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer); //target type
+
+    //Vertices we are not making a projection matrix so it goes by default screen positioning which is -1 to 1
+    float vertices [3 * 3] = {
+      -0.5f, -0.5f, 0.0f,
+      0.5f, -0.5f, 0.0f,
+      0.0f, 0.5f, 0.0f
+    };
+
+    //Upload data to GPU
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //data wot keep changing each frame
+
+    //So that GPU can read the data
+    glEnableVertexAttribArray(0); //creating index 0
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+    //Index buffer
+    glGenBuffers(1, &m_IndexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer); //Tells what order we want to draw the triangle, index 0 1 and 2 here
+
+    unsigned int indices[3] = {0,1,2};
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
+
+    //Shader program
+
+    m_ShaderProgram = glCreateProgram();
+
+    const char* vertexShaderSrc = R"(
+    #version 410 core
+    layout(location = 0) in vec3 aPos;
+
+    void main()
+    {
+        gl_Position = vec4(aPos, 1.0);
+    }
+    )";
+
+    const char* fragmentShaderSrc = R"(
+    #version 410 core
+    out vec4 FragColor;
+
+    void main()
+    {
+        FragColor = vec4(1.5, 4.0, 0.8, 1.0);
+    }
+    )";
+
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSrc, nullptr);
+    glCompileShader(vertexShader);
+
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSrc, nullptr);
+    glCompileShader(fragmentShader);
+
+    m_ShaderProgram = glCreateProgram();
+    glAttachShader(m_ShaderProgram, vertexShader);
+    glAttachShader(m_ShaderProgram, fragmentShader);
+    glLinkProgram(m_ShaderProgram);
+
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
   }
 
   Application::~Application() {
@@ -59,8 +128,15 @@ namespace BerryFlux {
 
   void Application::Run() {
     while(m_Running) {
-      glClearColor(1, 0, 1, 1);
+      int width, height;
+      glfwGetFramebufferSize((GLFWwindow*)m_Window->GetNativeWindow(), &width, &height);
+
+      glViewport(0, 0, width, height);
       glClear(GL_COLOR_BUFFER_BIT);
+
+      glUseProgram(m_ShaderProgram);
+      glBindVertexArray(m_VertexArray);
+      glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate();
