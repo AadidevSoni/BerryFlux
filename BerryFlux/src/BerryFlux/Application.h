@@ -8,6 +8,8 @@
 
 #include "BerryFlux/ImGui/ImGuiLayer.h"
 
+#include "BerryFlux/Renderer/Shader.h"
+
 namespace BerryFlux {
   class BERRYFLUX_API Application //“Make this class visible outside the DLL” Without this, Sandbox couldn’t access engine classes.
   {
@@ -36,7 +38,8 @@ namespace BerryFlux {
       LayerStack m_LayerStack;
 
       unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
-      unsigned int m_ShaderProgram;
+      
+      std::unique_ptr<Shader> m_Shader;
     private:
       static Application* s_Instance; //hold a singleton to our application as we can have only one application
   };

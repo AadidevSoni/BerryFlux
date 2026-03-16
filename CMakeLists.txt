@@ -30,6 +30,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/ImGui/ImGuiLayer.cpp
     BerryFlux/src/Platform/WindowsInput.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLContext.cpp
+    BerryFlux/src/BerryFlux/Renderer/Shader.cpp
 )
 
 #Precompiled headers

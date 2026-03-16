@@ -25,7 +25,7 @@ namespace BerryFlux {
     m_ImGuiLayer = new ImGuiLayer();
     //Adding to the layer stack
     PushOverlay(m_ImGuiLayer);
-    
+
     //Vertex array
     glGenVertexArrays(1, &m_VertexArray);
     glBindVertexArray(m_VertexArray);
@@ -56,44 +56,30 @@ namespace BerryFlux {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
 
     //Shader program
-
-    m_ShaderProgram = glCreateProgram();
-
-    const char* vertexShaderSrc = R"(
+    std::string vertexSrc = R"(
     #version 410 core
     layout(location = 0) in vec3 aPos;
+    out vec3 v_Position;
 
     void main()
-    {
-        gl_Position = vec4(aPos, 1.0);
+    { 
+      v_Position = aPos;
+      gl_Position = vec4(aPos, 1.0);
     }
     )";
 
-    const char* fragmentShaderSrc = R"(
+    std::string fragmentSrc = R"(
     #version 410 core
     out vec4 FragColor;
+    in vec3 v_Position;
 
     void main()
     {
-        FragColor = vec4(1.5, 4.0, 0.8, 1.0);
+      FragColor = vec4(v_Position * 0.5 + 0.5, 1.0);
     }
     )";
 
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSrc, nullptr);
-    glCompileShader(vertexShader);
-
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSrc, nullptr);
-    glCompileShader(fragmentShader);
-
-    m_ShaderProgram = glCreateProgram();
-    glAttachShader(m_ShaderProgram, vertexShader);
-    glAttachShader(m_ShaderProgram, fragmentShader);
-    glLinkProgram(m_ShaderProgram);
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
   }
 
   Application::~Application() {
@@ -130,11 +116,13 @@ namespace BerryFlux {
     while(m_Running) {
       int width, height;
       glfwGetFramebufferSize((GLFWwindow*)m_Window->GetNativeWindow(), &width, &height);
-
       glViewport(0, 0, width, height);
+
+      glClearColor(0.1f,0.1f,0.1f,1);
       glClear(GL_COLOR_BUFFER_BIT);
 
-      glUseProgram(m_ShaderProgram);
+      m_Shader->Bind();
+
       glBindVertexArray(m_VertexArray);
       glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
