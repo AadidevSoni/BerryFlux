@@ -30,10 +30,6 @@ namespace BerryFlux {
     glGenVertexArrays(1, &m_VertexArray);
     glBindVertexArray(m_VertexArray);
 
-    //Vertex buffer
-    glGenBuffers(1, &m_VertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer); //target type
-
     //Vertices we are not making a projection matrix so it goes by default screen positioning which is -1 to 1
     float vertices [3 * 3] = {
       -0.5f, -0.5f, 0.0f,
@@ -41,19 +37,14 @@ namespace BerryFlux {
       0.0f, 0.5f, 0.0f
     };
 
-    //Upload data to GPU
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //data wot keep changing each frame
+    m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
     //So that GPU can read the data
     glEnableVertexAttribArray(0); //creating index 0
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-    //Index buffer
-    glGenBuffers(1, &m_IndexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer); //Tells what order we want to draw the triangle, index 0 1 and 2 here
-
-    unsigned int indices[3] = {0,1,2};
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); 
+    uint32_t indices[3] = {0,1,2};
+    m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
 
     //Shader program
     std::string vertexSrc = R"(
@@ -124,7 +115,7 @@ namespace BerryFlux {
       m_Shader->Bind();
 
       glBindVertexArray(m_VertexArray);
-      glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+      glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate();

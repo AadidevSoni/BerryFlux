@@ -31,6 +31,9 @@ add_library(Engine SHARED
     BerryFlux/src/Platform/WindowsInput.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLContext.cpp
     BerryFlux/src/BerryFlux/Renderer/Shader.cpp
+    BerryFlux/src/BerryFlux/Renderer/Buffer.cpp
+    BerryFlux/src/Platform/OpenGL/OpenGLBuffer.cpp
+    BerryFlux/src/BerryFlux/Renderer/Renderer.cpp
 )
 
 #Precompiled headers
