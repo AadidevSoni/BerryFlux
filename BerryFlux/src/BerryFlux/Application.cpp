@@ -15,27 +15,6 @@ namespace BerryFlux {
 
   Application* Application::s_Instance = nullptr;
 
-  static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-  {
-    switch(type) 
-    {
-      case BerryFlux::ShaderDataType::Float:     return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Float2:    return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Float3:    return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Float4:    return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Mat3:      return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Mat4:      return GL_FLOAT;
-      case BerryFlux::ShaderDataType::Int:       return GL_INT;
-      case BerryFlux::ShaderDataType::Int2:      return GL_INT;
-      case BerryFlux::ShaderDataType::Int3:      return GL_INT;
-      case BerryFlux::ShaderDataType::Int4:      return GL_INT;
-      case BerryFlux::ShaderDataType::Bool:      return GL_BOOL;
-      case ShaderDataType::None: break;
-    }
-    BF_CORE_ASSERT(false, "Unknow shader data type!");
-    return 0;
-  }
-
   Application::Application() {
     BF_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
@@ -47,9 +26,8 @@ namespace BerryFlux {
     //Adding to the layer stack
     PushOverlay(m_ImGuiLayer);
 
-    //Vertex array
-    glGenVertexArrays(1, &m_VertexArray);
-    glBindVertexArray(m_VertexArray);
+    //VertexArrays
+    m_VertexArray.reset(VertexArray::Create());
 
     //Vertices we are not making a projection matrix so it goes by default screen positioning which is -1 to 1
     float vertices [3 * 7] = {
@@ -58,7 +36,8 @@ namespace BerryFlux {
       0.0f, 0.5f, 0.0f, 0.3f, 0.0f, 1.0f, 1.0f
     };
 
-    m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+    std::shared_ptr<VertexBuffer> vertexBuffer;
+    vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
     //To make layout not be directly accessible instead get it from the GetLayout
     {
@@ -66,27 +45,38 @@ namespace BerryFlux {
         {ShaderDataType::Float3, "aPos", true},
         {ShaderDataType::Float4, "aColor", true}
       };
-      m_VertexBuffer->SetLayout(layout);
+      vertexBuffer->SetLayout(layout);
     }
 
-    uint32_t index = 0;
-    const auto& layout = m_VertexBuffer->GetLayout();
-    for(const auto& element:layout)
-    {
-      //So that GPU can read the data
-      glEnableVertexAttribArray(index); //creating index 
-      glVertexAttribPointer(index, 
-        element.GetComponentCount(), 
-        ShaderDataTypeToOpenGLBaseType(element.Type), 
-        element.Normalized ? GL_TRUE : GL_FALSE, 
-        layout.GetStride(), 
-        (const void*)element.Offset
-      ); //Vertex attributes are stored in vertex array
-      index++;
-    }
+    m_VertexArray->AddVertexBuffer(vertexBuffer);
 
     uint32_t indices[3] = {0,1,2};
-    m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
+    std::shared_ptr<IndexBuffer> indexBuffer;
+    indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
+    m_VertexArray->SetIndexBuffer(indexBuffer);
+
+    m_SquareVA.reset(VertexArray::Create());
+
+    float squareVertices [3 * 4] = {
+      -0.75f, -0.75f, 0.0f, 
+      0.75f, -0.75f, 0.0f, 
+      0.75f, 0.75f, 0.0f,
+      -0.75f, 0.75f, 0.0f
+    };
+
+    std::shared_ptr<VertexBuffer> squareVB;
+    squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+    BufferLayout squareVBLayout = {
+        {ShaderDataType::Float3, "aPos", true}
+      };
+    squareVB->SetLayout(squareVBLayout);
+    m_SquareVA->AddVertexBuffer(squareVB);
+
+    uint32_t squareIndices[6] = {0,1,2,2,3,0};
+    std::shared_ptr<IndexBuffer> squareIB;
+    squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
+    m_SquareVA->SetIndexBuffer(squareIB);
 
     //Shader program
     std::string vertexSrc = R"(
@@ -120,6 +110,34 @@ namespace BerryFlux {
     )";
 
     m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+
+    //Second shader for square which accepts no color per vertex
+    std::string vertexSrc2 = R"(
+    #version 410 core
+    layout(location = 0) in vec3 aPos;
+
+    out vec3 v_Position;
+
+    void main()
+    { 
+      v_Position = aPos;
+      gl_Position = vec4(aPos, 1.0);
+    }
+    )";
+
+    std::string fragmentSrc2 = R"(
+    #version 410 core
+    out vec4 FragColor;
+
+    in vec3 v_Position;
+
+    void main()
+    {
+      FragColor = vec4(0.7, 0.2, 0.2, 1.0);
+    }
+    )";
+
+    m_Shader2.reset(new Shader(vertexSrc2, fragmentSrc2));
   }
 
   Application::~Application() {
@@ -161,10 +179,15 @@ namespace BerryFlux {
       glClearColor(0.1f,0.1f,0.1f,1);
       glClear(GL_COLOR_BUFFER_BIT);
 
-      m_Shader->Bind();
+      m_Shader2->Bind();
+      m_SquareVA->Bind();
 
-      glBindVertexArray(m_VertexArray);
-      glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+      glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+      m_Shader->Bind();
+      m_VertexArray->Bind();
+
+      glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate();

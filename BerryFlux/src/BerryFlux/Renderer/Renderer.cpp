@@ -4,5 +4,5 @@
 namespace BerryFlux {
 
   RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
-  
+
 }

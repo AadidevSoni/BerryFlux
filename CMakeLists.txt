@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(BerryFlux)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin/$<CONFIG>)
@@ -34,6 +35,8 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/Buffer.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLBuffer.cpp
     BerryFlux/src/BerryFlux/Renderer/Renderer.cpp
+    BerryFlux/src/BerryFlux/Renderer/VertexArray.cpp
+    BerryFlux/src/Platform/OpenGL/OpenGLVertexArray.cpp
 )
 
 #Precompiled headers
