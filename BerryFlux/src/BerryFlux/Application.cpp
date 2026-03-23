@@ -2,10 +2,9 @@
 #include "Application.h"
 #include "BerryFlux/Log.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include "Input.h"
+
+#include "BerryFlux/Renderer/Renderer.h"
 
 namespace BerryFlux {
 
@@ -172,22 +171,18 @@ namespace BerryFlux {
 
   void Application::Run() {
     while(m_Running) {
-      int width, height;
-      glfwGetFramebufferSize((GLFWwindow*)m_Window->GetNativeWindow(), &width, &height);
-      glViewport(0, 0, width, height);
+      RenderCommand::SetClearColor({0.1f,0.1f,0.1f,1});
+      RenderCommand::Clear();
 
-      glClearColor(0.1f,0.1f,0.1f,1);
-      glClear(GL_COLOR_BUFFER_BIT);
+      Renderer::BeginScene();
 
       m_Shader2->Bind();
-      m_SquareVA->Bind();
-
-      glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+      Renderer::Submit(m_SquareVA);
 
       m_Shader->Bind();
-      m_VertexArray->Bind();
+      Renderer::Submit(m_VertexArray);
 
-      glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+      Renderer::EndScene();
 
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate();

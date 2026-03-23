@@ -37,6 +37,9 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/Renderer.cpp
     BerryFlux/src/BerryFlux/Renderer/VertexArray.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLVertexArray.cpp
+    BerryFlux/src/BerryFlux/Renderer/RendererAPI.cpp 
+    BerryFlux/src/BerryFlux/Renderer/RenderCommand.cpp 
+    BerryFlux/src/Platform/OpenGL/OpenGLRendererAPI.cpp
 )
 
 #Precompiled headers
