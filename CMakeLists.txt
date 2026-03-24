@@ -40,6 +40,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/RendererAPI.cpp 
     BerryFlux/src/BerryFlux/Renderer/RenderCommand.cpp 
     BerryFlux/src/Platform/OpenGL/OpenGLRendererAPI.cpp
+    BerryFlux/src/BerryFlux/Renderer/OrthographicCamera.cpp
 )
 
 #Precompiled headers
