@@ -124,11 +124,34 @@ class ExampleLayer : public BerryFlux::Layer {
 
     void OnUpdate() override 
     {
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_LEFT))
+      {
+        m_CameraPosition.x -= m_CameraSpeed;
+      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_RIGHT))
+      {
+        m_CameraPosition.x += m_CameraSpeed;
+      }
+
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_DOWN))
+      {
+        m_CameraPosition.y -= m_CameraSpeed;
+      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_UP))
+      {
+        m_CameraPosition.y += m_CameraSpeed;
+      }
+
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_R))
+      {
+        m_CameraRotation -= m_CameraRotationSpeed;
+      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_E)){
+        m_CameraRotation += m_CameraRotationSpeed;
+      }
+
       BerryFlux::RenderCommand::SetClearColor({0.1f,0.1f,0.1f,1});
       BerryFlux::RenderCommand::Clear();
 
       m_Camera.SetPosition(m_CameraPosition); //Moving cam right and up
-      m_Camera.SetRotation(0.0f);
+      m_Camera.SetRotation(m_CameraRotation);
 
       BerryFlux::Renderer::BeginScene(m_Camera);
 
@@ -141,33 +164,6 @@ class ExampleLayer : public BerryFlux::Layer {
 
     void OnEvent(BerryFlux::Event& event) override 
     {
-      BerryFlux::EventDispatcher dispatcher(event);
-      dispatcher.Dispatch<BerryFlux::KeyPressedEvent>(BF_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
-    }
-
-    bool OnKeyPressedEvent(BerryFlux::KeyPressedEvent& event) 
-    {
-      if(event.GetKeyCode() == BF_KEY_LEFT)
-      {
-        m_CameraPosition.x -= m_CameraSpeed;
-      }
-
-      if(event.GetKeyCode() == BF_KEY_RIGHT)
-      {
-        m_CameraPosition.x += m_CameraSpeed;
-      }
-
-      if(event.GetKeyCode() == BF_KEY_DOWN)
-      {
-        m_CameraPosition.y -= m_CameraSpeed;
-      }
-
-      if(event.GetKeyCode() == BF_KEY_UP)
-      {
-        m_CameraPosition.y += m_CameraSpeed;
-      }
-
-      return false;
     }
 
     private:
@@ -179,7 +175,9 @@ class ExampleLayer : public BerryFlux::Layer {
 
       BerryFlux::OrthographicCamera m_Camera;
       glm::vec3 m_CameraPosition;
-      float m_CameraSpeed = 0.1f;
+      float m_CameraSpeed = 0.05f;
+      float m_CameraRotation = 0.0f;
+      float m_CameraRotationSpeed = 0.05f;
 };
 
 class Sandbox : public BerryFlux::Application {
