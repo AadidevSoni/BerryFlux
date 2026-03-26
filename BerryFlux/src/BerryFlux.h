@@ -13,5 +13,12 @@
 #include "BerryFlux/KeyCodes.h"
 #include "BerryFlux/MouseButtonCodes.h"
 
+#include "BerryFlux/Renderer/Renderer.h"
+#include "BerryFlux/Renderer/RenderCommand.h"
+#include "BerryFlux/Renderer/Buffer.h"
+#include "BerryFlux/Renderer/Shader.h"
+#include "BerryFlux/Renderer/VertexArray.h"
+#include "BerryFlux/Renderer/OrthographicCamera.h"
+
 //Entry point
 #include "BerryFlux/EntryPoint.h"
