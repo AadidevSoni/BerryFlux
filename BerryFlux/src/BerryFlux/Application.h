@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "BerryFlux/Events/ApplicationEvent.h"
 #include "BerryFlux/LayerStack.h"
+#include "BerryFlux/Core/Timestep.h"
 
 #include "BerryFlux/ImGui/ImGuiLayer.h"
 
@@ -34,11 +35,14 @@ namespace BerryFlux {
       inline Window& GetWindow() {return *m_Window;}
     private:
       bool OnWindowClose(WindowCloseEvent& e);
+    private:
       std::unique_ptr<Window> m_Window;
       ImGuiLayer* m_ImGuiLayer; //Adding ImGuiLayer as an explicit layer so that we dont have to manually add it instead automatically added
       bool m_Running = true;
 
       LayerStack m_LayerStack;
+
+      float m_LastFrameTime = 0.0f;
     
     private:
       static Application* s_Instance; //hold a singleton to our application as we can have only one application

@@ -6,6 +6,8 @@
 
 #include "BerryFlux/Renderer/Renderer.h"
 
+#include <GLFW/glfw3.h>
+
 namespace BerryFlux {
 
   //Call the function Application::x on this object and pass one argument when it is triggered.
@@ -60,8 +62,12 @@ namespace BerryFlux {
   void Application::Run() {
     while(m_Running) {
 
+      float time = (float)glfwGetTime();
+      Timestep timestep = time - m_LastFrameTime;
+      m_LastFrameTime = time;
+
       for(Layer* layer: m_LayerStack) {
-        layer->OnUpdate();
+        layer->OnUpdate(timestep);
       }
 
       //Testing out Input Polling

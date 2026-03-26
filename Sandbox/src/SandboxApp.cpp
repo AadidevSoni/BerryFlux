@@ -122,29 +122,32 @@ class ExampleLayer : public BerryFlux::Layer {
       m_Shader2.reset(new BerryFlux::Shader(vertexSrc2, fragmentSrc2));
     }
 
-    void OnUpdate() override 
+    void OnUpdate(BerryFlux::Timestep ts) override 
     {
+      //BF_TRACE("DeltaTime: {0}s ({1}ms)",ts.GetSeconds(), ts.GetMilliseconds());
+
       if(BerryFlux::Input::IsKeyPressed(BF_KEY_LEFT))
       {
-        m_CameraPosition.x -= m_CameraSpeed;
+        m_CameraPosition.x -= m_CameraSpeed * ts; 
       }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_RIGHT))
       {
-        m_CameraPosition.x += m_CameraSpeed;
+        m_CameraPosition.x += m_CameraSpeed * ts;
       }
 
       if(BerryFlux::Input::IsKeyPressed(BF_KEY_DOWN))
       {
-        m_CameraPosition.y -= m_CameraSpeed;
+        m_CameraPosition.y -= m_CameraSpeed * ts;
       }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_UP))
       {
-        m_CameraPosition.y += m_CameraSpeed;
+        m_CameraPosition.y += m_CameraSpeed * ts;
       }
 
       if(BerryFlux::Input::IsKeyPressed(BF_KEY_R))
       {
-        m_CameraRotation -= m_CameraRotationSpeed;
-      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_E)){
-        m_CameraRotation += m_CameraRotationSpeed;
+        m_CameraRotation -= m_CameraRotationSpeed * ts;
+      }
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_E)){
+        m_CameraRotation += m_CameraRotationSpeed * ts;
       }
 
       BerryFlux::RenderCommand::SetClearColor({0.1f,0.1f,0.1f,1});
@@ -175,9 +178,9 @@ class ExampleLayer : public BerryFlux::Layer {
 
       BerryFlux::OrthographicCamera m_Camera;
       glm::vec3 m_CameraPosition;
-      float m_CameraSpeed = 0.05f;
+      float m_CameraSpeed = 1.0f;
       float m_CameraRotation = 0.0f;
-      float m_CameraRotationSpeed = 0.05f;
+      float m_CameraRotationSpeed = 5.0f;
 };
 
 class Sandbox : public BerryFlux::Application {

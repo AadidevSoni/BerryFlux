@@ -4,6 +4,9 @@
 #include "BerryFlux/Application.h"
 #include "BerryFlux/Layer.h"
 #include "BerryFlux/Log.h"
+
+#include "BerryFlux/Core/Timestep.h"
+
 #include "BerryFlux/ImGui/ImGuiLayer.h"
 #include "BerryFlux/Events/Event.h"
 #include "BerryFlux/Events/KeyEvent.h"
