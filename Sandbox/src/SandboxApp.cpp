@@ -94,7 +94,7 @@ class ExampleLayer : public BerryFlux::Layer {
       m_Shader.reset(new BerryFlux::Shader(vertexSrc, fragmentSrc));
 
       //Second shader for square which accepts no color per vertex
-      std::string vertexSrc2 = R"(
+      std::string flatColorShaderVertexSrc = R"(
       #version 410 core
       layout(location = 0) in vec3 aPos;
 
@@ -110,19 +110,22 @@ class ExampleLayer : public BerryFlux::Layer {
       }
       )";
 
-      std::string fragmentSrc2 = R"(
+      std::string flatColorShaderFragmentSrc = R"(
       #version 410 core
       out vec4 FragColor;
 
       in vec3 v_Position;
 
+      uniform vec4 u_Color; 
+
       void main()
       {
-        FragColor = vec4(0.7, 0.2, 0.2, 1.0);
+        FragColor = u_Color;
       }
       )";
+      //Added a uniform for color in the fragment shader and we will set it from the application code
 
-      m_Shader2.reset(new BerryFlux::Shader(vertexSrc2, fragmentSrc2));
+      m_FlatColorShader.reset(new BerryFlux::Shader(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
     }
 
     void OnUpdate(BerryFlux::Timestep ts) override 
@@ -183,14 +186,22 @@ class ExampleLayer : public BerryFlux::Layer {
       static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f)); //Scaling matrix for square to 10% of the current size
 
       //Shader binding and vertex binding are done in the submissions now
+      glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f); 
+      glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+
       for(int i=0;i<20;i++) 
       {
         for(int j=0;j<20;j++) 
         {
           glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f); //Position for each square
           glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos + m_SquarePosition) * scale; //Translation and scaling for each square
-          BerryFlux::Renderer::Submit(m_Shader2, m_SquareVA, transform); //Render the square with the particular tranform
-        }
+          if((i+j) % 2 == 0) {
+            m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
+          } else {
+            m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+          }
+          BerryFlux::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform); //Render the square with the particular tranform
+        } 
       }
 
       BerryFlux::Renderer::EndScene();
@@ -204,7 +215,7 @@ class ExampleLayer : public BerryFlux::Layer {
       std::shared_ptr<BerryFlux::Shader> m_Shader;
       std::shared_ptr<BerryFlux::VertexArray> m_VertexArray;
 
-      std::shared_ptr<BerryFlux::Shader> m_Shader2;
+      std::shared_ptr<BerryFlux::Shader> m_FlatColorShader;
       std::shared_ptr<BerryFlux::VertexArray> m_SquareVA;
 
       BerryFlux::OrthographicCamera m_Camera;
