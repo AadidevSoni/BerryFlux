@@ -1,8 +1,9 @@
 #include <BerryFlux.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public BerryFlux::Layer {
   public:
-    ExampleLayer():Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+    ExampleLayer():Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_SquarePosition(0.0f)
     {
       //VertexArrays
       m_VertexArray.reset(BerryFlux::VertexArray::Create());
@@ -36,10 +37,10 @@ class ExampleLayer : public BerryFlux::Layer {
       m_SquareVA.reset(BerryFlux::VertexArray::Create());
 
       float squareVertices [3 * 4] = {
-        -0.75f, -0.75f, 0.0f, 
-        0.75f, -0.75f, 0.0f, 
-        0.75f, 0.75f, 0.0f,
-        -0.75f, 0.75f, 0.0f
+        -0.5f, -0.5f, 0.0f, 
+        0.5f, -0.5f, 0.0f, 
+        0.5f, 0.5f, 0.0f,
+        -0.5f, 0.5f, 0.0f
       };
 
       std::shared_ptr<BerryFlux::VertexBuffer> squareVB;
@@ -63,6 +64,7 @@ class ExampleLayer : public BerryFlux::Layer {
       layout(location = 1) in vec4 aColor;
 
       uniform mat4 u_ViewProjection;
+      uniform mat4 u_Transform;
 
       out vec3 v_Position;
       out vec4 v_Color;
@@ -71,7 +73,7 @@ class ExampleLayer : public BerryFlux::Layer {
       { 
         v_Position = aPos;
         v_Color = aColor;
-        gl_Position = u_ViewProjection * vec4(aPos, 1.0);
+        gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0);
       }
       )";
 
@@ -97,13 +99,14 @@ class ExampleLayer : public BerryFlux::Layer {
       layout(location = 0) in vec3 aPos;
 
       uniform mat4 u_ViewProjection;
+      uniform mat4 u_Transform;
 
       out vec3 v_Position;
 
       void main()
       { 
         v_Position = aPos;
-        gl_Position = u_ViewProjection * vec4(aPos, 1.0);
+        gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0);
       }
       )";
 
@@ -150,6 +153,22 @@ class ExampleLayer : public BerryFlux::Layer {
         m_CameraRotation += m_CameraRotationSpeed * ts;
       }
 
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_A))
+      {
+        m_SquarePosition.x -= m_SquareSpeed * ts; 
+      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_D))
+      {
+        m_SquarePosition.x += m_SquareSpeed * ts;
+      }
+
+      if(BerryFlux::Input::IsKeyPressed(BF_KEY_S))
+      {
+        m_SquarePosition.y -= m_SquareSpeed * ts;
+      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_W))
+      {
+        m_SquarePosition.y += m_SquareSpeed * ts;
+      }
+
       BerryFlux::RenderCommand::SetClearColor({0.1f,0.1f,0.1f,1});
       BerryFlux::RenderCommand::Clear();
 
@@ -158,9 +177,21 @@ class ExampleLayer : public BerryFlux::Layer {
 
       BerryFlux::Renderer::BeginScene(m_Camera);
 
+      BerryFlux::Renderer::Submit(m_Shader, m_VertexArray); //Render the triangle with the default transform
+
+      //glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition); //Translation matrix for square
+      static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f)); //Scaling matrix for square to 10% of the current size
+
       //Shader binding and vertex binding are done in the submissions now
-      BerryFlux::Renderer::Submit(m_Shader2, m_SquareVA);
-      BerryFlux::Renderer::Submit(m_Shader, m_VertexArray);
+      for(int i=0;i<20;i++) 
+      {
+        for(int j=0;j<20;j++) 
+        {
+          glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f); //Position for each square
+          glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos + m_SquarePosition) * scale; //Translation and scaling for each square
+          BerryFlux::Renderer::Submit(m_Shader2, m_SquareVA, transform); //Render the square with the particular tranform
+        }
+      }
 
       BerryFlux::Renderer::EndScene();
     }
@@ -181,6 +212,9 @@ class ExampleLayer : public BerryFlux::Layer {
       float m_CameraSpeed = 1.0f;
       float m_CameraRotation = 0.0f;
       float m_CameraRotationSpeed = 5.0f;
+
+      glm::vec3 m_SquarePosition; 
+      float m_SquareSpeed = 0.5f;
 };
 
 class Sandbox : public BerryFlux::Application {
