@@ -1,5 +1,8 @@
 #include <BerryFlux.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include "Platform/OpenGL/OpenGLShader.h"
+#include <glm/gtc/type_ptr.hpp>
+#include "imgui.h"
 
 class ExampleLayer : public BerryFlux::Layer {
   public:
@@ -91,7 +94,7 @@ class ExampleLayer : public BerryFlux::Layer {
       }
       )";
 
-      m_Shader.reset(new BerryFlux::Shader(vertexSrc, fragmentSrc));
+      m_Shader.reset(BerryFlux::Shader::Create(vertexSrc, fragmentSrc)); //we cannot do new shader as now it is an abstract class
 
       //Second shader for square which accepts no color per vertex
       std::string flatColorShaderVertexSrc = R"(
@@ -125,7 +128,7 @@ class ExampleLayer : public BerryFlux::Layer {
       )";
       //Added a uniform for color in the fragment shader and we will set it from the application code
 
-      m_FlatColorShader.reset(new BerryFlux::Shader(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+      m_FlatColorShader.reset(BerryFlux::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
     }
 
     void OnUpdate(BerryFlux::Timestep ts) override 
@@ -188,6 +191,8 @@ class ExampleLayer : public BerryFlux::Layer {
       //Shader binding and vertex binding are done in the submissions now
       glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f); 
       glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+      
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->Bind(); //Bind the shader before setting the uniform
 
       for(int i=0;i<20;i++) 
       {
@@ -195,10 +200,12 @@ class ExampleLayer : public BerryFlux::Layer {
         {
           glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f); //Position for each square
           glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos + m_SquarePosition) * scale; //Translation and scaling for each square
-          if((i+j) % 2 == 0) {
-            m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
-          } else {
-            m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+          if((i+j) % 3 == 0) {
+            std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", redColor);
+          } else if((i+j) % 3 == 1) {
+            std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", blueColor);
+          }else {
+            std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(m_SquareColor, 1.0f)); //Set the color uniform to the square color variable
           }
           BerryFlux::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform); //Render the square with the particular tranform
         } 
@@ -207,8 +214,16 @@ class ExampleLayer : public BerryFlux::Layer {
       BerryFlux::Renderer::EndScene();
     }
 
+    void OnImGuiRender() override 
+    {
+      ImGui::Begin("Settings");
+      ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor)); //This creates a color picker in the ImGui window for the square color
+      ImGui::End();
+    }
+
     void OnEvent(BerryFlux::Event& event) override 
     {
+      
     }
 
     private:
@@ -226,6 +241,8 @@ class ExampleLayer : public BerryFlux::Layer {
 
       glm::vec3 m_SquarePosition; 
       float m_SquareSpeed = 0.5f;
+
+      glm::vec3 m_SquareColor = {0.4f, 0.9f, 0.4f}; //This is the color we will set in the shader uniform for the square
 };
 
 class Sandbox : public BerryFlux::Application {

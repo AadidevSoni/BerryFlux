@@ -41,6 +41,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/RenderCommand.cpp 
     BerryFlux/src/Platform/OpenGL/OpenGLRendererAPI.cpp
     BerryFlux/src/BerryFlux/Renderer/OrthographicCamera.cpp
+    BerryFlux/src/Platform/OpenGL/OpenGLShader.cpp
 )
 
 #Precompiled headers
@@ -83,10 +84,11 @@ target_include_directories(Sandbox PRIVATE
     BerryFlux/src
     BerryFlux/vendor/spdlog/include 
     BerryFlux/vendor/glm/include
+    BerryFlux/vendor/imgui
 )
 
 #Links engine to game.
-target_link_libraries(Sandbox Engine)
+target_link_libraries(Sandbox PRIVATE Engine ImGui)
 
 #Ensures DLL sits next to executable. Otherwise OS can’t load it at runtime.
 add_custom_command(TARGET Sandbox POST_BUILD
