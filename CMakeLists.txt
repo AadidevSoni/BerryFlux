@@ -42,6 +42,9 @@ add_library(Engine SHARED
     BerryFlux/src/Platform/OpenGL/OpenGLRendererAPI.cpp
     BerryFlux/src/BerryFlux/Renderer/OrthographicCamera.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLShader.cpp
+    BerryFlux/src/BerryFlux/Renderer/Texture.cpp 
+    BerryFlux/src/Platform/OpenGL/OpenGLTexture.cpp
+    BerryFlux/vendor/stb_image/stb_image.cpp
 )
 
 #Precompiled headers
@@ -53,6 +56,7 @@ target_include_directories(Engine PUBLIC
     BerryFlux/vendor/spdlog/include
     BerryFlux/vendor/glad/include
     BerryFlux/vendor/glm
+    BerryFlux/vendor/stb_image
 )
 
 #Link GLFW to Engine
@@ -85,6 +89,7 @@ target_include_directories(Sandbox PRIVATE
     BerryFlux/vendor/spdlog/include 
     BerryFlux/vendor/glm/include
     BerryFlux/vendor/imgui
+    BerryFlux/vendor/stb_image
 )
 
 #Links engine to game.

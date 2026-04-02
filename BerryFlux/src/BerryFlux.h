@@ -20,6 +20,7 @@
 #include "BerryFlux/Renderer/RenderCommand.h"
 #include "BerryFlux/Renderer/Buffer.h"
 #include "BerryFlux/Renderer/Shader.h"
+#include "BerryFlux/Renderer/Texture.h"
 #include "BerryFlux/Renderer/VertexArray.h"
 #include "BerryFlux/Renderer/OrthographicCamera.h"
 

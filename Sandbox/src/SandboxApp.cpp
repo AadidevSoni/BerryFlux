@@ -39,18 +39,19 @@ class ExampleLayer : public BerryFlux::Layer {
 
       m_SquareVA.reset(BerryFlux::VertexArray::Create());
 
-      float squareVertices [3 * 4] = {
-        -0.5f, -0.5f, 0.0f, 
-        0.5f, -0.5f, 0.0f, 
-        0.5f, 0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f
+      float squareVertices [5 * 4] = {
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.0f, 1.0f, 0.0f, //Bottom right corner has red color as red is 1 and green is 0
+        0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+        -0.5f, 0.5f, 0.0f, 0.0f, 1.0f //If negative then 0 else positive and these are the 4 corners
       };
 
       BerryFlux::Ref<BerryFlux::VertexBuffer> squareVB;
       squareVB.reset(BerryFlux::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
       BerryFlux::BufferLayout squareVBLayout = {
-          {BerryFlux::ShaderDataType::Float3, "aPos", true}
+          {BerryFlux::ShaderDataType::Float3, "aPos", true},
+          {BerryFlux::ShaderDataType::Float2, "aTexCoord", true}
         };
       squareVB->SetLayout(squareVBLayout);
       m_SquareVA->AddVertexBuffer(squareVB);
@@ -129,6 +130,48 @@ class ExampleLayer : public BerryFlux::Layer {
       //Added a uniform for color in the fragment shader and we will set it from the application code
 
       m_FlatColorShader.reset(BerryFlux::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+      //Texture Shader
+      std::string textureShaderVertexSrc = R"(
+      #version 410 core
+      layout(location = 0) in vec3 aPos;
+      layout(location = 1) in vec2 aTexCoord;
+
+      uniform mat4 u_ViewProjection;
+      uniform mat4 u_Transform;
+
+      out vec2 v_TexCoord;
+
+      void main()
+      { 
+          v_TexCoord = aTexCoord;
+          gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0);
+      }
+      )";
+
+      std::string textureShaderFragmentSrc = R"(
+      #version 410 core
+      out vec4 FragColor;
+
+      in vec2 v_TexCoord;
+
+      uniform sampler2D u_Texture; //Uniform for the texture we will set from the application code
+
+      void main()
+      {
+        //Outputing as color, first 2 components become the colro and x and y are red and green and 0 blue and 1 alpha
+        //Visulaisation of data we put in vertex buffer as texture coordinates
+        //FragColor = vec4(v_TexCoord, 0.0, 1.0);
+        FragColor = texture(u_Texture, v_TexCoord); //Sample the texture with the texture coordinates and output it as the fragment color
+      }
+      )";
+      //Added a uniform for color in the fragment shader and we will set it from the application code
+
+      m_TextureShader.reset(BerryFlux::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+      m_Texture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/Checkerboard.png"); //Creating a texture from the file path and storing it in the m_Texture variable
+    
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); //Bind the texture shader before setting the uniform
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0); //Set the texture uniform to the texture slot 0
     }
 
     void OnUpdate(BerryFlux::Timestep ts) override 
@@ -183,7 +226,8 @@ class ExampleLayer : public BerryFlux::Layer {
 
       BerryFlux::Renderer::BeginScene(m_Camera);
 
-      BerryFlux::Renderer::Submit(m_Shader, m_VertexArray); //Render the triangle with the default transform
+      //Triangle
+      //BerryFlux::Renderer::Submit(m_Shader, m_VertexArray); //Render the triangle with the default transform
 
       //glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition); //Translation matrix for square
       static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f)); //Scaling matrix for square to 10% of the current size
@@ -194,11 +238,16 @@ class ExampleLayer : public BerryFlux::Layer {
       
       std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->Bind(); //Bind the shader before setting the uniform
 
-      for(int i=0;i<20;i++) 
+      int gridSize = 30;
+      float gridSpacing = 0.11f; //Spacing between squares in the grid
+      for(int i=0;i<gridSize;i++) 
       {
-        for(int j=0;j<20;j++) 
+        for(int j=0;j<gridSize;j++) 
         {
-          glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f); //Position for each square
+          float x = (i - gridSize / 2) * gridSpacing;
+          float y = (j - gridSize / 2) * gridSpacing;
+
+          glm::vec3 pos(x, y, 0.0f); //Position for each square
           glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos + m_SquarePosition) * scale; //Translation and scaling for each square
           if((i+j) % 3 == 0) {
             std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", redColor);
@@ -210,6 +259,11 @@ class ExampleLayer : public BerryFlux::Layer {
           BerryFlux::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform); //Render the square with the particular tranform
         } 
       }
+
+      //Big Texture Square
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // ✅ bind shader FIRST
+      m_Texture->Bind(0); // then bind texture
+      BerryFlux::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
 
       BerryFlux::Renderer::EndScene();
     }
@@ -230,8 +284,10 @@ class ExampleLayer : public BerryFlux::Layer {
       BerryFlux::Ref<BerryFlux::Shader> m_Shader;
       BerryFlux::Ref<BerryFlux::VertexArray> m_VertexArray;
 
-      BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader;
+      BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader, m_TextureShader;
       BerryFlux::Ref<BerryFlux::VertexArray> m_SquareVA;
+
+      BerryFlux::Ref<BerryFlux::Texture2D> m_Texture;
 
       BerryFlux::OrthographicCamera m_Camera;
       glm::vec3 m_CameraPosition;

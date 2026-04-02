@@ -48,7 +48,7 @@ namespace BerryFlux {
     //If the event is a WindowCloseEvent, call OnWindowClose()
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose)); //If the Event e is a window close event
     //Prints every event being logged
-    BF_CORE_TRACE("{0}",e.ToString()); //prints what kind of event it is and data set to
+    //BF_CORE_TRACE("{0}",e.ToString()); //prints what kind of event it is and data set to
 
     //Backward iteration for event handling
     for(auto it = m_LayerStack.end();it != m_LayerStack.begin();) {
