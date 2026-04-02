@@ -16,7 +16,7 @@ namespace BerryFlux {
   {
   }
 
-  void Renderer::Submit(const BerryFlux::Ref<Shader>& shader, const BerryFlux::Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+  void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
   { 
     shader->Bind();
     std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);

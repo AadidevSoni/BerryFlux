@@ -21,7 +21,7 @@ namespace BerryFlux {
     BF_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
 
-    m_Window = BerryFlux::Scope<Window>(Window::Create());
+    m_Window = Scope<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent)); //This event callback goes into the WindowData and calls OnEvent function
   
     m_ImGuiLayer = new ImGuiLayer();
