@@ -18,7 +18,7 @@ class ExampleLayer : public BerryFlux::Layer {
         0.0f, 0.5f, 0.0f, 0.3f, 0.0f, 1.0f, 1.0f
       };
 
-      std::shared_ptr<BerryFlux::VertexBuffer> vertexBuffer;
+      BerryFlux::Ref<BerryFlux::VertexBuffer> vertexBuffer;
       vertexBuffer.reset(BerryFlux::VertexBuffer::Create(vertices, sizeof(vertices)));
 
       //To make layout not be directly accessible instead get it from the GetLayout
@@ -33,7 +33,7 @@ class ExampleLayer : public BerryFlux::Layer {
       m_VertexArray->AddVertexBuffer(vertexBuffer);
 
       uint32_t indices[3] = {0,1,2};
-      std::shared_ptr<BerryFlux::IndexBuffer> indexBuffer;
+      BerryFlux::Ref<BerryFlux::IndexBuffer> indexBuffer;
       indexBuffer.reset(BerryFlux::IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
       m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -46,7 +46,7 @@ class ExampleLayer : public BerryFlux::Layer {
         -0.5f, 0.5f, 0.0f
       };
 
-      std::shared_ptr<BerryFlux::VertexBuffer> squareVB;
+      BerryFlux::Ref<BerryFlux::VertexBuffer> squareVB;
       squareVB.reset(BerryFlux::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
       BerryFlux::BufferLayout squareVBLayout = {
@@ -56,7 +56,7 @@ class ExampleLayer : public BerryFlux::Layer {
       m_SquareVA->AddVertexBuffer(squareVB);
 
       uint32_t squareIndices[6] = {0,1,2,2,3,0};
-      std::shared_ptr<BerryFlux::IndexBuffer> squareIB;
+      BerryFlux::Ref<BerryFlux::IndexBuffer> squareIB;
       squareIB.reset(BerryFlux::IndexBuffer::Create(squareIndices, sizeof(squareIndices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
       m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -227,11 +227,11 @@ class ExampleLayer : public BerryFlux::Layer {
     }
 
     private:
-      std::shared_ptr<BerryFlux::Shader> m_Shader;
-      std::shared_ptr<BerryFlux::VertexArray> m_VertexArray;
+      BerryFlux::Ref<BerryFlux::Shader> m_Shader;
+      BerryFlux::Ref<BerryFlux::VertexArray> m_VertexArray;
 
-      std::shared_ptr<BerryFlux::Shader> m_FlatColorShader;
-      std::shared_ptr<BerryFlux::VertexArray> m_SquareVA;
+      BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader;
+      BerryFlux::Ref<BerryFlux::VertexArray> m_SquareVA;
 
       BerryFlux::OrthographicCamera m_Camera;
       glm::vec3 m_CameraPosition;

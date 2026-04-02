@@ -6,8 +6,8 @@
 namespace BerryFlux
 {
 
-  std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-  std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+  BerryFlux::Ref<spdlog::logger> Log::s_CoreLogger;
+  BerryFlux::Ref<spdlog::logger> Log::s_ClientLogger;
 
   void Log::Init() 
   {

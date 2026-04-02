@@ -36,7 +36,7 @@ namespace BerryFlux {
     private:
       bool OnWindowClose(WindowCloseEvent& e);
     private:
-      std::unique_ptr<Window> m_Window;
+      BerryFlux::Scope<Window> m_Window;
       ImGuiLayer* m_ImGuiLayer; //Adding ImGuiLayer as an explicit layer so that we dont have to manually add it instead automatically added
       bool m_Running = true;
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #if defined(_WIN32) || defined(_WIN64)
 
@@ -24,3 +25,12 @@
 #define BIT(x) (1 << x)
 
 #define BF_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace BerryFlux {
+
+    template<typename T> //This is a template for a unique pointer. It can be used for any type T. It is a unique pointer that can only be owned by one object at a time. It is used for resources that are not shared between objects, such as a window or a renderer.
+    using Scope = std::unique_ptr<T>;
+
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+}
