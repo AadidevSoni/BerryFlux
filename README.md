@@ -18,31 +18,426 @@ Unlike traditional applications that contain hardcoded logic, a game engine work
 3. Rendering the final result to the screen
 4. Handling interaction through **input, events, and systems**
 
-In simple terms:
+# BerryFlux
 
-```
-Assets → Engine Systems → Rendered Output
-```
+### ⚡ A Data-Driven Real-Time Rendering Engine
 
-BerryFlux focuses on building the **core infrastructure** required for such a system.
+BerryFlux is a **modern C++ game engine** built for **real-time 3D rendering, simulations, and interactive systems**.
+
+It is designed with:
+
+* ⚙️ **Modular Architecture**
+* 🧠 **Data-Oriented Design**
+* 🧩 **Extensibility**
+* 🌍 **Multi-API Rendering Support**
+
+> *“A game engine is not a game — it is a system that transforms data into experience.”*
 
 ---
 
-# Architecture
+## 📌 In Simple Terms
 
-The engine follows a **layered architecture** designed for modularity and portability.
+```text
+Assets → Engine Systems → GPU → Rendered Output
+```
 
+BerryFlux focuses on building the **core infrastructure** required for this transformation pipeline.
+
+---
+
+## 🏗️ Architecture
+
+```text
+┌──────────────────────────────┐
+│   Application (Client/Game)  │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│      BerryFlux Engine        │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│       Platform Layer         │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│       Rendering API          │
+│ (OpenGL / Vulkan / DirectX)  │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│      Operating System        │
+└──────────────────────────────┘
 ```
-Application (Client / Game)
-        ↓
-BerryFlux Engine
-        ↓
-Platform Layer
-        ↓
-Rendering API
-        ↓
-Operating System
+
+### 💡 Key Idea
+
+* Application defines behavior
+* Engine provides systems
+* Platform layer ensures portability
+* Rendering API communicates with GPU
+
+---
+
+## ⚙️ Core Systems
+
+### 🚀 Application & Entry Point
+
+BerryFlux **controls program execution**:
+
+```cpp
+Application* CreateApplication();
 ```
+
+Flow:
+
+```text
+main()
+ ↓
+Log::Init()
+ ↓
+CreateApplication()
+ ↓
+Application::Run()
+ ↓
+Main Loop
+```
+
+---
+
+### 📊 Logging System
+
+Built on **spdlog**, wrapped with custom macros:
+
+```cpp
+BF_CORE_INFO("Engine Initialized");
+BF_WARN("Sandbox Running");
+```
+
+Features:
+
+* Colored output
+* Engine + Client separation
+* Macro-based API
+
+---
+
+### ⚡ Event System
+
+A **decoupled messaging system** using bitmasks:
+
+```text
+Event
+ ├── KeyEvent
+ ├── MouseEvent
+ └── WindowEvent
+```
+
+✔ Type-safe dispatching
+✔ No tight coupling
+
+---
+
+### 🧱 Layer System
+
+```text
+Top
+│  ImGui Layer
+│  Game Layer
+│  Engine Systems
+Bottom
+```
+
+* Modular system stacking
+* Event propagation (top → bottom)
+* Overlay priority handling
+
+---
+
+### 🖥️ Window & Platform Abstraction
+
+```text
+Application
+   ↓
+Window Interface
+   ↓
+GLFWWindow
+   ↓
+GLFW
+   ↓
+OS
+```
+
+✔ Platform-independent core
+✔ Easy to extend
+
+---
+
+### 🎮 Input System
+
+Polling-based input:
+
+```cpp
+if (Input::IsKeyPressed(BF_KEY_SPACE))
+```
+
+✔ Supports combos
+✔ Decoupled from GLFW
+
+---
+
+## 🎨 Rendering Engine
+
+### 🧩 Architecture
+
+```text
+Renderer (High-Level)
+        ↓
+Render Command Queue
+        ↓
+Renderer API (Abstraction)
+        ↓
+OpenGL / Vulkan / DirectX
+```
+
+---
+
+### 🔧 Features Implemented
+
+* OpenGL rendering backend
+* Shader abstraction system
+* Vertex & Index buffers
+* Vertex arrays
+* Buffer layouts
+* Render command system
+* Scene submission pipeline
+
+---
+
+### 🧠 Rendering Pipeline
+
+```text
+BeginScene(Camera)
+   ↓
+Submit(Object, Transform, Material)
+   ↓
+EndScene()
+   ↓
+Render Queue Execution
+```
+
+✔ API-independent rendering
+✔ Optimized submission flow
+
+---
+
+## 🎥 Camera System
+
+* View Matrix (position & rotation)
+* Projection Matrix (FOV, aspect ratio)
+
+```text
+Projection × View × Model × Vertex
+```
+
+✔ Camera affects entire scene
+✔ Movement updates world transforms
+
+---
+
+## ⏱️ Timestep System
+
+Frame-rate independent movement:
+
+```cpp
+position += speed * deltaTime;
+```
+
+✔ Smooth gameplay
+✔ Consistent physics
+
+---
+
+## 🧱 Transform System
+
+Each object has:
+
+* Position
+* Rotation
+* Scale
+
+Handled using **transformation matrices**.
+
+---
+
+## 🎨 Material System
+
+Materials = **Shader + Uniform Data**
+
+* Dynamic color control
+* Efficient shader reuse
+* Reduced GPU state changes
+
+---
+
+## 🧵 Smart Pointer System
+
+Custom memory system:
+
+```cpp
+Ref<T>   // Shared ownership
+Scope<T> // Unique ownership
+```
+
+✔ Safe memory handling
+✔ Future-ready for multithreading
+
+---
+
+## 🖼️ Texture System
+
+* Texture2D abstraction
+* stb_image integration
+* GPU texture sampling
+
+✔ Supports image-based rendering
+✔ Extensible for advanced maps
+
+---
+
+## 🧰 ImGui Integration
+
+* Docking enabled
+* Multi-viewport support
+* Debug UI layer
+
+✔ Real-time debugging tools
+✔ Editor foundation
+
+---
+
+## ⌨️ Input + Key System
+
+Custom key codes:
+
+```cpp
+BF_KEY_W
+BF_KEY_SPACE
+```
+
+✔ No GLFW dependency in client code
+
+---
+
+## 📦 Project Structure
+
+```text
+BerryFlux
+│
+├── Core
+│   ├── Application
+│   ├── Layer
+│   ├── Input
+│
+├── Renderer
+│   ├── Renderer
+│   ├── RendererAPI
+│   ├── Buffers
+│   ├── Shader
+│
+├── Platform
+│   └── GLFW
+│
+├── Sandbox
+│   └── Example Application
+│
+├── vendor
+│   ├── glfw
+│   ├── spdlog
+│   ├── imgui
+│   └── stb_image
+│
+└── CMakeLists.txt
+```
+
+---
+
+## 🛠️ Build Instructions
+
+```bash
+git clone <repo>
+cd BerryFlux
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+Run:
+
+```bash
+./bin/Sandbox
+```
+
+---
+
+## 🚀 Current Features
+
+* Entry Point System
+* Application Lifecycle
+* Logging System
+* Event System
+* Layer Stack
+* Window Abstraction
+* Input System
+* OpenGL Renderer
+* Shader System
+* Camera System
+* Material System
+* Texture System
+* ImGui Integration
+* Smart Pointer System
+
+---
+
+## 🔮 Planned Features
+
+* Vulkan Backend
+* DirectX Support
+* Entity Component System (ECS)
+* Physics Engine
+* Scene Graph
+* Asset Pipeline
+* Virtual File System
+* Scripting System
+* Editor UI
+
+---
+
+## 🧪 Technologies Used
+
+* **C++17**
+* **CMake**
+* **OpenGL**
+* **GLFW**
+* **GLAD**
+* **spdlog**
+* **ImGui**
+* **GLM**
+* **stb_image**
+
+---
+
+## 👨‍💻 Author
+
+**Aadidev Soni**
+
+Game Engine Developer
+Computer Science Student
+
+---
+
+> ⚡ BerryFlux is not just a project — it is the foundation of a scalable, multi-platform rendering engine.
 
 Major systems in the engine include:
 
