@@ -13,9 +13,7 @@ namespace BerryFlux {
 
     stbi_set_flip_vertically_on_load(1);
     int width, height, channels;
-    stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 3);
-    channels = 3;//Load the image data from the file path and get the width, height and number of channels in the image
-    
+    stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
     //Assert if the data is null, meaning the image failed to load
     if (!data)
     {
@@ -54,11 +52,20 @@ namespace BerryFlux {
     glGenTextures(1, &m_RendererID); //Generate a texture and store the renderer ID in m_RendererID
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
+    //Set texture swizzle for 1 channel textures to output the red channel as the color and set alpha to 1. This is because when we have a single channel texture, we want to use that channel as the color and set the alpha to 1 so that it is fully opaque. This is useful for things like masks or heightmaps where we only care about one channel of data.
+    if (channels == 1)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_R, GL_RED);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_A, GL_ONE);
+    }
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //Set the texture parameters for minification and magnification filters to nearest
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     //Uploading texture 
     glTexImage2D(

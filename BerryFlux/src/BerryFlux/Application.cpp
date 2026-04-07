@@ -24,6 +24,8 @@ namespace BerryFlux {
     m_Window = Scope<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent)); //This event callback goes into the WindowData and calls OnEvent function
   
+    Renderer::Init();
+
     m_ImGuiLayer = new ImGuiLayer();
     //Adding to the layer stack
     PushOverlay(m_ImGuiLayer);
@@ -65,6 +67,9 @@ namespace BerryFlux {
       float time = (float)glfwGetTime();
       Timestep timestep = time - m_LastFrameTime;
       m_LastFrameTime = time;
+
+      RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+      RenderCommand::Clear();
 
       for(Layer* layer: m_LayerStack) {
         layer->OnUpdate(timestep);

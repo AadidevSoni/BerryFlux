@@ -169,7 +169,8 @@ class ExampleLayer : public BerryFlux::Layer {
 
       m_TextureShader.reset(BerryFlux::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
       m_Texture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/Checkerboard.png"); //Creating a texture from the file path and storing it in the m_Texture variable
-    
+      m_NoBGTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/chessp.png");
+
       std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); //Bind the texture shader before setting the uniform
       std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0); //Set the texture uniform to the texture slot 0
     }
@@ -261,9 +262,12 @@ class ExampleLayer : public BerryFlux::Layer {
       }
 
       //Big Texture Square
-      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // ✅ bind shader FIRST
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // bind shader FIRST
       m_Texture->Bind(0); // then bind texture
       BerryFlux::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // bind shader FIRST
+      m_NoBGTexture->Bind(0); // then bind texture
+      BerryFlux::Renderer::Submit(m_TextureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, -0.25f, 0.1f)) * glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
 
       BerryFlux::Renderer::EndScene();
     }
@@ -287,7 +291,7 @@ class ExampleLayer : public BerryFlux::Layer {
       BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader, m_TextureShader;
       BerryFlux::Ref<BerryFlux::VertexArray> m_SquareVA;
 
-      BerryFlux::Ref<BerryFlux::Texture2D> m_Texture;
+      BerryFlux::Ref<BerryFlux::Texture2D> m_Texture, m_NoBGTexture;
 
       BerryFlux::OrthographicCamera m_Camera;
       glm::vec3 m_CameraPosition;
@@ -298,7 +302,7 @@ class ExampleLayer : public BerryFlux::Layer {
       glm::vec3 m_SquarePosition; 
       float m_SquareSpeed = 0.5f;
 
-      glm::vec3 m_SquareColor = {0.4f, 0.9f, 0.4f}; //This is the color we will set in the shader uniform for the square
+      glm::vec3 m_SquareColor = {1.0f, 1.0f, 1.0f}; //This is the color we will set in the shader uniform for the square
 };
 
 class Sandbox : public BerryFlux::Application {
