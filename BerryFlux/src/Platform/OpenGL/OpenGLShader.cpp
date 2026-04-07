@@ -1,60 +1,121 @@
 #include "bfpch.h"
 #include "OpenGLShader.h"
 
+#include <fstream>
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace BerryFlux {
 
-  OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) {
+  static GLenum ShaderTypeFromString(const std::string& type) 
+  {
+    if(type == "vertex")
+      return GL_VERTEX_SHADER;
+    if(type == "fragment" || type == "pixel")
+      return GL_FRAGMENT_SHADER;
 
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER); // Create an empty vertex shader handle
-    const GLchar *source = vertexSrc.c_str(); // Send the vertex shader source code to GL
-    glShaderSource(vertexShader, 1, &source, 0);
-    glCompileShader(vertexShader); // Compile the vertex shader
+    BF_CORE_ASSERT(false, "Unknown shader type!");
+    return 0;
+  }
 
-    GLint isCompiled = 0;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
+  OpenGLShader::OpenGLShader(const std::string& filepath) 
+  {
+    std::string shaderSource = ReadFile(filepath);
+    //We need to separate the vertex and fragment shader source code from the shader file. We will use a simple convention where we will have a line that says #shader vertex and #shader fragment to separate the two shader source codes. We will use a stringstream to read the shader source code and separate it based on the #shader lines.
+    auto shaderSources = PreProcess(shaderSource);
+    Compile(shaderSources);
+  }
 
-    if(isCompiled == GL_FALSE)
+  OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) 
+  {
+    std::unordered_map<GLenum, std::string> sources;
+    sources[GL_VERTEX_SHADER] = vertexSrc;
+    sources[GL_FRAGMENT_SHADER] = fragmentSrc;
+    Compile(sources);
+  }
+
+  OpenGLShader::~OpenGLShader() {
+    glDeleteProgram(m_RendererID);
+  }
+
+  std::string OpenGLShader::ReadFile(const std::string& filepath)
+  {
+    std::string result;
+    std::ifstream in(filepath, std::ios::in | std::ios::binary);
+    if(in) 
     {
-      GLint maxLength = 0;
-      glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
-      std::vector<GLchar> infoLog(maxLength);
-      glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
-      glDeleteShader(vertexShader);// Compile the vertex shader  
-      BF_CORE_ERROR("{0}",infoLog.data());
-      BF_CORE_ASSERT(false, "Vertex shader compilation failure!")
-      return;
+      in.seekg(0, std::ios::end); //Goes to the end of the file
+      result.resize(in.tellg()); //Resizes the result string to the size of the file
+      in.seekg(0, std::ios::beg); //Goes back to the beginning of the file
+      in.read(&result[0], result.size()); //Reads the file into the result string
+      in.close();
+    }else 
+    {
+      BF_CORE_ERROR("Could not open file: {0}", filepath);
+      BF_CORE_ASSERT(false, "File open failure!");
+    }
+    return result; 
+  }
+
+  std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source) 
+  {
+    std::unordered_map<GLenum, std::string> shaderSources;
+
+    const char* typeToken = "#type";
+    size_t typeTokenLength = strlen(typeToken);
+    size_t pos = source.find(typeToken, 0); //Start of shader type declaration  
+    while(pos != std::string::npos) 
+    {
+      size_t eol = source.find_first_of("\r\n", pos); //End of shader type declaration line
+      BF_CORE_ASSERT(eol != std::string::npos, "Syntax error");
+      size_t begin = pos + typeTokenLength + 1; //Start of shader type name (after "#type " keyword)
+      std::string type = source.substr(begin, eol - begin); //Extract shader type name
+      BF_CORE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified");
+
+      size_t nextLinePos = source.find_first_not_of("\r\n", eol); //Start of shader code after shader type declaration line
+      BF_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
+      pos = source.find(typeToken, nextLinePos); //Start of next shader type declaration line
+
+      shaderSources[ShaderTypeFromString(type)] = 
+        (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos); //Extract shader code
+    }
+    return shaderSources;
+  }
+
+  void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
+  {
+    GLuint program = glCreateProgram();
+    std::vector<GLenum> glShaderIDs(shaderSources.size());
+    //Compiles both vbertex and fragment shaders and links them together into a shader program. Then we can use that shader program to render our objects. We will use the OpenGL functions glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glGetShaderInfoLog, glCreateProgram, glAttachShader, glLinkProgram, glGetProgramiv, glGetProgramInfoLog, glDeleteShader, glDeleteProgram to do this.
+    for(auto& kv : shaderSources) 
+    {
+      GLenum type = kv.first;
+      const std::string source = kv.second;
+
+      GLuint shader = glCreateShader(type); // Create an empty vertex shader handle
+
+      const GLchar *sourceCstr = source.c_str(); // Send the vertex shader source code to GL
+      glShaderSource(shader, 1, &sourceCstr, 0);
+      glCompileShader(shader); // Compile the vertex shader
+
+      GLint isCompiled = 0;
+      glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+
+      if(isCompiled == GL_FALSE)
+      {
+        GLint maxLength = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+        std::vector<GLchar> infoLog(maxLength);
+        glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+        glDeleteShader(shader);// Compile the vertex shader  
+        BF_CORE_ERROR("{0}",infoLog.data());
+        BF_CORE_ASSERT(false, "Shader compilation failure!")
+        break;
+      }
+      glAttachShader(program, shader); //Attach the compiled shader to the program
+      glShaderIDs.push_back(shader);
     }
 
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // Create an empty fragment shader handle
-    source = fragmentSrc.c_str(); // Send the fragment shader source code to GL
-    glShaderSource(fragmentShader, 1, &source, 0);
-    glCompileShader(fragmentShader); // Compile the fragment shader
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-    if (isCompiled == GL_FALSE)
-    {
-      GLint maxLength = 0;
-      glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-      std::vector<GLchar> infoLog(maxLength);
-      glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-      glDeleteShader(fragmentShader);
-      glDeleteShader(vertexShader);
-      BF_CORE_ERROR("{0}",infoLog.data());
-      BF_CORE_ASSERT(false, "Fragment shader compilation failure!")
-      return;
-    }
-
-    // Vertex and fragment shaders are successfully compiled. Now time to link them together into a program.
-    // Get a program object.
-    m_RendererID = glCreateProgram();
-    GLuint program = m_RendererID;
-
-    // Attach our shaders to our program
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragmentShader);
     // Link our program
     glLinkProgram(program);
 
@@ -67,8 +128,10 @@ namespace BerryFlux {
       std::vector<GLchar> infoLog(maxLength);
       glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
       glDeleteProgram(program);
-      glDeleteShader(vertexShader);
-      glDeleteShader(fragmentShader);
+
+      for(auto id : glShaderIDs){
+        glDeleteShader(id);
+      }
 
       BF_CORE_ERROR("{0}",infoLog.data());
       BF_CORE_ASSERT(false, "Shader link failure!")
@@ -76,12 +139,11 @@ namespace BerryFlux {
     }
 
     // Always detach shaders after a successful link.
-    glDetachShader(program, vertexShader);
-    glDetachShader(program, fragmentShader);
-  }
+    for(auto id : glShaderIDs){
+      glDetachShader(program, id);
+    }
 
-  OpenGLShader::~OpenGLShader() {
-    glDeleteProgram(m_RendererID);
+    m_RendererID = program;
   }
 
   void OpenGLShader::Bind() const {
