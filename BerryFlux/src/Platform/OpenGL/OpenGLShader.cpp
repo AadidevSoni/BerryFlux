@@ -24,10 +24,18 @@ namespace BerryFlux {
     //We need to separate the vertex and fragment shader source code from the shader file. We will use a simple convention where we will have a line that says #shader vertex and #shader fragment to separate the two shader source codes. We will use a stringstream to read the shader source code and separate it based on the #shader lines.
     auto shaderSources = PreProcess(shaderSource);
     Compile(shaderSources);
+
+    //Extract name from file path
+    auto lastSlash = filepath.find_last_of("/\\");
+    lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+    auto lastDot = filepath.rfind('.'); //same as find last of but it only finds the last dot and not the last slash. This is because we want to get the file name without the extension and the extension is after the last dot.
+    auto count = lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash;
+    m_Name = filepath.substr(lastSlash, count);
   }
 
-  OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc) 
+  OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) 
   {
+    m_Name = name;
     std::unordered_map<GLenum, std::string> sources;
     sources[GL_VERTEX_SHADER] = vertexSrc;
     sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -85,7 +93,9 @@ namespace BerryFlux {
   void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
   {
     GLuint program = glCreateProgram();
-    std::vector<GLenum> glShaderIDs(shaderSources.size());
+    BF_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now (vertex and fragment)");
+    std::array<GLenum, 2> glShaderIDs; //This will store the shader IDs for the compiled shaders so that we can delete them after linking the program. We use an array because we only support 2 shaders for now, but we could easily change this to a vector if we wanted to support more shaders in the future.
+    int glShaderIDIndex = 0;
     //Compiles both vbertex and fragment shaders and links them together into a shader program. Then we can use that shader program to render our objects. We will use the OpenGL functions glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glGetShaderInfoLog, glCreateProgram, glAttachShader, glLinkProgram, glGetProgramiv, glGetProgramInfoLog, glDeleteShader, glDeleteProgram to do this.
     for(auto& kv : shaderSources) 
     {
@@ -113,7 +123,7 @@ namespace BerryFlux {
         break;
       }
       glAttachShader(program, shader); //Attach the compiled shader to the program
-      glShaderIDs.push_back(shader);
+      glShaderIDs[glShaderIDIndex++] = shader;
     }
 
     // Link our program

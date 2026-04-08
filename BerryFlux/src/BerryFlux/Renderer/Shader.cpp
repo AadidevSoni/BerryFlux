@@ -5,26 +5,59 @@
 
 namespace BerryFlux {
 
-  Shader* Shader::Create(const std::string& filepath)
+  Ref<Shader> Shader::Create(const std::string& filepath)
   {
     switch(Renderer::GetAPI()) {
       case RendererAPI::API::None:      BF_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
-      case RendererAPI::API::OpenGL:    return new OpenGLShader(filepath);  
+      case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLShader>(filepath);
     }
 
     BF_CORE_ASSERT(false, "Unknown Renderer API!");
     return nullptr;
   }
-  
-  Shader* Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
+
+  Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
   {
     switch(Renderer::GetAPI()) {
       case RendererAPI::API::None:      BF_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
-      case RendererAPI::API::OpenGL:    return new OpenGLShader(vertexSrc, fragmentSrc);  
+      case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
     }
 
     BF_CORE_ASSERT(false, "Unknown Renderer API!");
     return nullptr;
+  }
+
+  void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
+  {
+    BF_CORE_ASSERT(!Exists(name), "Shader already exists!"); //Assert if the shader already exists in the library
+    m_Shaders[name] = shader;
+  }
+
+  void ShaderLibrary::Add(const Ref<Shader>& shader)
+  {
+    //We need to get the name of the shader from the file path. We will use the file name without the extension as the name of the shader. We will use this name to store the shader in the library and to access it later.
+    auto& name = shader->GetName();
+    m_Shaders[name] = shader; 
+  }
+
+  BerryFlux::Ref<BerryFlux::Shader> ShaderLibrary::Load(const std::string& filepath)
+  {
+    auto shader = Shader::Create(filepath);
+    Add(shader);
+    return shader;
+  }
+
+  BerryFlux::Ref<BerryFlux::Shader> ShaderLibrary::Load(const std::string& name, const std::string& filepath)
+  {
+    auto shader = Shader::Create(filepath);
+    Add(name, shader);
+    return shader;
+  }
+
+  Ref<Shader> ShaderLibrary::Get(const std::string& name)
+  {
+    BF_CORE_ASSERT(Exists(name), "Shader does not exist!");
+    return m_Shaders[name];
   }
 
 }

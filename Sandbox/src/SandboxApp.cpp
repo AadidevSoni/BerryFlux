@@ -95,7 +95,7 @@ class ExampleLayer : public BerryFlux::Layer {
       }
       )";
 
-      m_Shader.reset(BerryFlux::Shader::Create(vertexSrc, fragmentSrc)); //we cannot do new shader as now it is an abstract class
+      m_Shader = BerryFlux::Shader::Create("VertexPosTriangleShader",vertexSrc, fragmentSrc); //we cannot do new shader as now it is an abstract class
 
       //Second shader for square which accepts no color per vertex
       std::string flatColorShaderVertexSrc = R"(
@@ -129,18 +129,18 @@ class ExampleLayer : public BerryFlux::Layer {
       )";
       //Added a uniform for color in the fragment shader and we will set it from the application code
 
-      m_FlatColorShader.reset(BerryFlux::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+      m_FlatColorShader = BerryFlux::Shader::Create("FlatColorShader", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
       //Texture Shader (deleted)
-      
-      //Added a uniform for color in the fragment shader and we will set it from the application code
 
-      m_TextureShader.reset(BerryFlux::Shader::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/shaders/Texture.glsl"));
+      //Added a uniform for color in the fragment shader and we will set it from the application code
+      
+      auto textureShader = m_ShaderLibrary.Load("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/shaders/Texture.glsl"); //Loading the shader from the file path and storing it in the shader library
       m_Texture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/Checkerboard.png"); //Creating a texture from the file path and storing it in the m_Texture variable
       m_NoBGTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/chessp.png");
 
-      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); //Bind the texture shader before setting the uniform
-      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0); //Set the texture uniform to the texture slot 0
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(textureShader)->Bind(); //Bind the texture shader before setting the uniform
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0); //Set the texture uniform to the texture slot 0
     }
 
     void OnUpdate(BerryFlux::Timestep ts) override 
@@ -229,13 +229,15 @@ class ExampleLayer : public BerryFlux::Layer {
         } 
       }
 
+      auto textureShader = m_ShaderLibrary.Get("Texture"); //Get the texture shader from the shader library
+
       //Big Texture Square
-      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // bind shader FIRST
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(textureShader)->Bind(); // bind shader FIRST
       m_Texture->Bind(0); // then bind texture
-      BerryFlux::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
-      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_TextureShader)->Bind(); // bind shader FIRST
+      BerryFlux::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
+      std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(textureShader)->Bind(); // bind shader FIRST
       m_NoBGTexture->Bind(0); // then bind texture
-      BerryFlux::Renderer::Submit(m_TextureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, -0.25f, 0.1f)) * glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
+      BerryFlux::Renderer::Submit(textureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, -0.25f, 0.1f)) * glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); //Render the square with the particular tranform
 
       BerryFlux::Renderer::EndScene();
     }
@@ -253,10 +255,11 @@ class ExampleLayer : public BerryFlux::Layer {
     }
 
     private:
+      BerryFlux::ShaderLibrary m_ShaderLibrary;
       BerryFlux::Ref<BerryFlux::Shader> m_Shader;
       BerryFlux::Ref<BerryFlux::VertexArray> m_VertexArray;
 
-      BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader, m_TextureShader;
+      BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader;
       BerryFlux::Ref<BerryFlux::VertexArray> m_SquareVA;
 
       BerryFlux::Ref<BerryFlux::Texture2D> m_Texture, m_NoBGTexture;
