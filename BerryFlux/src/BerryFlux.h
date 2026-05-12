@@ -15,6 +15,7 @@
 #include "BerryFlux/Input.h"
 #include "BerryFlux/KeyCodes.h"
 #include "BerryFlux/MouseButtonCodes.h"
+#include "BerryFlux/OrthographicCameraController.h"
 
 #include "BerryFlux/Renderer/Renderer.h"
 #include "BerryFlux/Renderer/RenderCommand.h"

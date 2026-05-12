@@ -45,6 +45,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/Texture.cpp 
     BerryFlux/src/Platform/OpenGL/OpenGLTexture.cpp
     BerryFlux/vendor/stb_image/stb_image.cpp
+    BerryFlux/src/BerryFlux/OrthographicCameraController.cpp
 )
 
 #Precompiled headers

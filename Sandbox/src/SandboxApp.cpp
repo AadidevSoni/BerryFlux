@@ -6,7 +6,7 @@
 
 class ExampleLayer : public BerryFlux::Layer {
   public:
-    ExampleLayer():Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_SquarePosition(0.0f)
+    ExampleLayer():Layer("Example"), m_CameraController(1280.0f / 720.0f, true), m_SquarePosition(0.0f)
     {
       //VertexArrays
       m_VertexArray.reset(BerryFlux::VertexArray::Create());
@@ -145,32 +145,11 @@ class ExampleLayer : public BerryFlux::Layer {
 
     void OnUpdate(BerryFlux::Timestep ts) override 
     {
+      //Update
+      m_CameraController.OnUpdate(ts);
+
+      //Render
       //BF_TRACE("DeltaTime: {0}s ({1}ms)",ts.GetSeconds(), ts.GetMilliseconds());
-
-      if(BerryFlux::Input::IsKeyPressed(BF_KEY_LEFT))
-      {
-        m_CameraPosition.x -= m_CameraSpeed * ts; 
-      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_RIGHT))
-      {
-        m_CameraPosition.x += m_CameraSpeed * ts;
-      }
-
-      if(BerryFlux::Input::IsKeyPressed(BF_KEY_DOWN))
-      {
-        m_CameraPosition.y -= m_CameraSpeed * ts;
-      }else if(BerryFlux::Input::IsKeyPressed(BF_KEY_UP))
-      {
-        m_CameraPosition.y += m_CameraSpeed * ts;
-      }
-
-      if(BerryFlux::Input::IsKeyPressed(BF_KEY_R))
-      {
-        m_CameraRotation -= m_CameraRotationSpeed * ts;
-      }
-      if(BerryFlux::Input::IsKeyPressed(BF_KEY_E)){
-        m_CameraRotation += m_CameraRotationSpeed * ts;
-      }
-
       if(BerryFlux::Input::IsKeyPressed(BF_KEY_A))
       {
         m_SquarePosition.x -= m_SquareSpeed * ts; 
@@ -190,10 +169,7 @@ class ExampleLayer : public BerryFlux::Layer {
       BerryFlux::RenderCommand::SetClearColor({0.1f,0.1f,0.1f,1});
       BerryFlux::RenderCommand::Clear();
 
-      m_Camera.SetPosition(m_CameraPosition); //Moving cam right and up
-      m_Camera.SetRotation(m_CameraRotation);
-
-      BerryFlux::Renderer::BeginScene(m_Camera);
+      BerryFlux::Renderer::BeginScene(m_CameraController.GetCamera());
 
       //Triangle
       //BerryFlux::Renderer::Submit(m_Shader, m_VertexArray); //Render the triangle with the default transform
@@ -249,9 +225,9 @@ class ExampleLayer : public BerryFlux::Layer {
       ImGui::End();
     }
 
-    void OnEvent(BerryFlux::Event& event) override 
+    void OnEvent(BerryFlux::Event& e) override 
     {
-      
+      m_CameraController.OnEvent(e);
     }
 
     private:
@@ -264,11 +240,7 @@ class ExampleLayer : public BerryFlux::Layer {
 
       BerryFlux::Ref<BerryFlux::Texture2D> m_Texture, m_NoBGTexture;
 
-      BerryFlux::OrthographicCamera m_Camera;
-      glm::vec3 m_CameraPosition;
-      float m_CameraSpeed = 1.0f;
-      float m_CameraRotation = 0.0f;
-      float m_CameraRotationSpeed = 5.0f;
+      BerryFlux::OrthographicCameraController m_CameraController;
 
       glm::vec3 m_SquarePosition; 
       float m_SquareSpeed = 0.5f;

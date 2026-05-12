@@ -7,6 +7,8 @@ namespace BerryFlux {
   {
     public:
       OrthographicCamera(float left, float right, float bottom, float top); //orthographic matrix and -1 for near and 1 for far
+      //When the zoom level gets updated by scrolling
+      void SetProjection(float left, float right, float bottom, float top); //does what the constructor does
 
       const glm::vec3& GetPosition() const {return m_Position;}      
       void SetPosition(const glm::vec3& position) {m_Position = position; RecalculateViewMatrix();}
