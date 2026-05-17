@@ -1,9 +1,9 @@
 #pragma once
 
 //For use by BerryFlux applications
-#include "BerryFlux/Application.h"
-#include "BerryFlux/Layer.h"
-#include "BerryFlux/Log.h"
+#include "BerryFlux/Core/Application.h"
+#include "BerryFlux/Core/Layer.h"
+#include "BerryFlux/Core/Log.h"
 
 #include "BerryFlux/Core/Timestep.h"
 
@@ -12,10 +12,10 @@
 #include "BerryFlux/Events/KeyEvent.h"
 #include "BerryFlux/Events/MouseEvent.h"
 
-#include "BerryFlux/Input.h"
-#include "BerryFlux/KeyCodes.h"
-#include "BerryFlux/MouseButtonCodes.h"
-#include "BerryFlux/OrthographicCameraController.h"
+#include "BerryFlux/Core/Input.h"
+#include "BerryFlux/Core/KeyCodes.h"
+#include "BerryFlux/Core/MouseButtonCodes.h"
+#include "BerryFlux/Renderer/OrthographicCameraController.h"
 
 #include "BerryFlux/Renderer/Renderer.h"
 #include "BerryFlux/Renderer/RenderCommand.h"
@@ -26,4 +26,4 @@
 #include "BerryFlux/Renderer/OrthographicCamera.h"
 
 //Entry point
-#include "BerryFlux/EntryPoint.h"
+#include "BerryFlux/Core/EntryPoint.h"

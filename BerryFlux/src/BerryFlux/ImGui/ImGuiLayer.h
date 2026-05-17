@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BerryFlux/Layer.h"
+#include "BerryFlux/Core/Layer.h"
 
 namespace BerryFlux {
 

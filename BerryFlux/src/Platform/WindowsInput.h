@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "BerryFlux/Input.h"
+#include "BerryFlux/Core/Input.h"
 
 namespace BerryFlux {
   class WindowsInput : public Input {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BerryFlux/Core.h"
+#include "BerryFlux/Core/Core.h"
 
 namespace BerryFlux {
   class BERRYFLUX_API Input {

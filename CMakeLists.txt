@@ -23,11 +23,11 @@ add_subdirectory(BerryFlux/vendor/glm)
 # ---------------- Engine ----------------
 # Builds BerryFlux as a shared library:
 add_library(Engine SHARED
-    BerryFlux/src/BerryFlux/Application.cpp
-    BerryFlux/src/BerryFlux/Log.cpp
+    BerryFlux/src/BerryFlux/Core/Application.cpp
+    BerryFlux/src/BerryFlux/Core/Log.cpp
     BerryFlux/src/Platform/GLFWWindow.cpp
-    BerryFlux/src/BerryFlux/Layer.cpp
-    BerryFlux/src/BerryFlux/LayerStack.cpp
+    BerryFlux/src/BerryFlux/Core/Layer.cpp
+    BerryFlux/src/BerryFlux/Core/LayerStack.cpp
     BerryFlux/src/BerryFlux/ImGui/ImGuiLayer.cpp
     BerryFlux/src/Platform/WindowsInput.cpp
     BerryFlux/src/Platform/OpenGL/OpenGLContext.cpp
@@ -45,7 +45,7 @@ add_library(Engine SHARED
     BerryFlux/src/BerryFlux/Renderer/Texture.cpp 
     BerryFlux/src/Platform/OpenGL/OpenGLTexture.cpp
     BerryFlux/vendor/stb_image/stb_image.cpp
-    BerryFlux/src/BerryFlux/OrthographicCameraController.cpp
+    BerryFlux/src/BerryFlux/Renderer/OrthographicCameraController.cpp
 )
 
 #Precompiled headers

@@ -1,6 +1,6 @@
 #include "bfpch.h"
 #include "Application.h"
-#include "BerryFlux/Log.h"
+#include "BerryFlux/Core/Log.h"
 
 #include "Input.h"
 

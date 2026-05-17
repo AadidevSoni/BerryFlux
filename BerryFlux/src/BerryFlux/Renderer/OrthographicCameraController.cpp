@@ -1,7 +1,7 @@
 #include "bfpch.h"
-#include "OrthographicCameraController.h"
-#include "BerryFlux/Input.h"
-#include "BerryFlux/KeyCodes.h"
+#include "BerryFlux/Renderer/OrthographicCameraController.h"
+#include "BerryFlux/Core/Input.h"
+#include "BerryFlux/Core/KeyCodes.h"
 #include "BerryFlux/Renderer/RenderCommand.h"
 
 namespace BerryFlux {

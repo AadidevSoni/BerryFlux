@@ -2,7 +2,7 @@
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include "BerryFlux/Window.h"
+#include "BerryFlux/Core/Window.h"
 
 #include "BerryFlux/Renderer/GraphicsContext.h"
 

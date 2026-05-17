@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "BerryFlux/Application.h"
+#include "BerryFlux/Core/Application.h"
 
 namespace BerryFlux {
 

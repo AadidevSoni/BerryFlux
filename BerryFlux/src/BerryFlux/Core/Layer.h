@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BerryFlux/Core.h"
+#include "BerryFlux/Core/Core.h"
 #include "BerryFlux/Events/Event.h"
 #include "BerryFlux/Core/Timestep.h"
 

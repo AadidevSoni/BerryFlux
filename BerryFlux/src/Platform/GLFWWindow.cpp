@@ -1,8 +1,8 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include "BerryFlux/Log.h"
+#include "BerryFlux/Core/Log.h"
 #include "GLFWWindow.h"
-#include "BerryFlux/Window.h"
+#include "BerryFlux/Core/Window.h"
 #include "BerryFlux/Events/ApplicationEvent.h"
 #include "BerryFlux/Events/MouseEvent.h"
 #include "BerryFlux/Events/KeyEvent.h"

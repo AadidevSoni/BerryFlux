@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "BerryFlux/Core.h"
+#include "BerryFlux/Core/Core.h"
 
 namespace BerryFlux {
   

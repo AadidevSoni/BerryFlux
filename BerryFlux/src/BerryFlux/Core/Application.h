@@ -1,10 +1,10 @@
 #pragma once 
 
 #include "Core.h"
-#include "Events/Event.h"
+#include "BerryFlux/Events/Event.h"
 #include "Window.h"
 #include "BerryFlux/Events/ApplicationEvent.h"
-#include "BerryFlux/LayerStack.h"
+#include "BerryFlux/Core/LayerStack.h"
 #include "BerryFlux/Core/Timestep.h"
 
 #include "BerryFlux/ImGui/ImGuiLayer.h"
