@@ -35,10 +35,12 @@ namespace BerryFlux {
       inline Window& GetWindow() {return *m_Window;}
     private:
       bool OnWindowClose(WindowCloseEvent& e);
+      bool OnWindowResize(WindowResizeEvent& e);
     private:
       std::unique_ptr<Window> m_Window;
       ImGuiLayer* m_ImGuiLayer; //Adding ImGuiLayer as an explicit layer so that we dont have to manually add it instead automatically added
       bool m_Running = true;
+      bool m_Minimized = false;
 
       LayerStack m_LayerStack;
 

@@ -73,12 +73,14 @@ namespace BerryFlux {
     //Set GLFW Callbacks Instead of writing a separate function: void Resize(GLFWwindow* window, int w, int h) You define it inline using a lambda:
     //We want this to call the application OnEvent function
     //GLFWwindow has a struct where we can put any data we want and we pointed to it DataStruct
-    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) { //GLFW automatically passes these values.
+    //VVIP for MAC - But width,height are logical window coords, not framebuffer pixels.
+    glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) { //GLFW automatically passes these values.
       WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window); //get the user pointer from the window and type casting it
       data.Width = width;
       data.Height = height;
 
       WindowResizeEvent event(width, height); //engine creates a resize event object.
+      //BF_CORE_WARN("{0}, {1}",width,height);
       data.EventCallback(event); //This calls the event callback function. So this actually becomes: Application::OnEvent(event)
     });
 

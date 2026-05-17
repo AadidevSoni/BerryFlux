@@ -17,7 +17,7 @@ class ExampleLayer : public BerryFlux::Layer {
         0.5f, -0.5f, 0.0f, 1.0f, 0.2f, 0.3f, 0.4f,
         0.0f, 0.5f, 0.0f, 0.3f, 0.0f, 1.0f, 1.0f
       };
-
+ 
       BerryFlux::Ref<BerryFlux::VertexBuffer> vertexBuffer;
       vertexBuffer.reset(BerryFlux::VertexBuffer::Create(vertices, sizeof(vertices)));
 
@@ -228,6 +228,11 @@ class ExampleLayer : public BerryFlux::Layer {
     void OnEvent(BerryFlux::Event& e) override 
     {
       m_CameraController.OnEvent(e);
+
+      if(e.GetEventType() == BerryFlux::EventType::WindowResize)
+      {
+        auto& re = (BerryFlux::WindowResizeEvent&)e;
+      }
     }
 
     private:

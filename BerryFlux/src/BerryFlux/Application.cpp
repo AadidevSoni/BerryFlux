@@ -49,6 +49,7 @@ namespace BerryFlux {
     EventDispatcher dispatcher(e);
     //If the event is a WindowCloseEvent, call OnWindowClose()
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose)); //If the Event e is a window close event
+    dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
     //Prints every event being logged
     //BF_CORE_TRACE("{0}",e.ToString()); //prints what kind of event it is and data set to
 
@@ -71,8 +72,10 @@ namespace BerryFlux {
       RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
       RenderCommand::Clear();
 
-      for(Layer* layer: m_LayerStack) {
-        layer->OnUpdate(timestep);
+      if(!m_Minimized) {
+        for(Layer* layer: m_LayerStack) {
+          layer->OnUpdate(timestep);
+        }
       }
 
       //Testing out Input Polling
@@ -93,5 +96,20 @@ namespace BerryFlux {
     m_Running = false;
     return true;
   }
+
+  bool Application::OnWindowResize(WindowResizeEvent& e) {
+    
+    if(e.GetWidth() == 0 || e.GetHeight() == 0)
+    {
+      m_Minimized = true;
+      return false;
+    }
+    m_Minimized = false;
+
+    //Telling the application the size changed
+    Renderer::OnWindowResize(e.GetWidth(),e.GetHeight());
+
+    return false;
+  } 
 
 }

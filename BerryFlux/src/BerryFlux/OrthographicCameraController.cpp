@@ -2,6 +2,7 @@
 #include "OrthographicCameraController.h"
 #include "BerryFlux/Input.h"
 #include "BerryFlux/KeyCodes.h"
+#include "BerryFlux/Renderer/RenderCommand.h"
 
 namespace BerryFlux {
 
@@ -65,7 +66,8 @@ namespace BerryFlux {
 
   bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) 
   {
-    m_AspectRatio -= (float)e.GetWidth() / (float)e.GetHeight();
+    m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
+    RenderCommand::SetViewport(0, 0, e.GetWidth(), e.GetHeight());
     //modify the aspect ratio value
     m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel , m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
     
