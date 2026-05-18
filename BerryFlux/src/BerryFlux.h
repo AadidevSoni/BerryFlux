@@ -24,6 +24,3 @@
 #include "BerryFlux/Renderer/Texture.h"
 #include "BerryFlux/Renderer/VertexArray.h"
 #include "BerryFlux/Renderer/OrthographicCamera.h"
-
-//Entry point
-#include "BerryFlux/Core/EntryPoint.h"

@@ -1,15 +1,18 @@
 #include <BerryFlux.h>
+//Entry point
+#include <BerryFlux/Core/EntryPoint.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/type_ptr.hpp>
 #include "imgui.h"
+#include "Sandbox2D.h"
 
 class ExampleLayer : public BerryFlux::Layer {
   public:
     ExampleLayer():Layer("Example"), m_CameraController(1280.0f / 720.0f, true), m_SquarePosition(0.0f)
     {
       //VertexArrays
-      m_VertexArray.reset(BerryFlux::VertexArray::Create());
+      m_VertexArray = BerryFlux::VertexArray::Create();
 
       //Vertices we are not making a projection matrix so it goes by default screen positioning which is -1 to 1
       float vertices [3 * 7] = {
@@ -37,7 +40,7 @@ class ExampleLayer : public BerryFlux::Layer {
       indexBuffer.reset(BerryFlux::IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
       m_VertexArray->SetIndexBuffer(indexBuffer);
 
-      m_SquareVA.reset(BerryFlux::VertexArray::Create());
+      m_SquareVA = BerryFlux::VertexArray::Create();
 
       float squareVertices [5 * 4] = {
         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -228,11 +231,6 @@ class ExampleLayer : public BerryFlux::Layer {
     void OnEvent(BerryFlux::Event& e) override 
     {
       m_CameraController.OnEvent(e);
-
-      if(e.GetEventType() == BerryFlux::EventType::WindowResize)
-      {
-        auto& re = (BerryFlux::WindowResizeEvent&)e;
-      }
     }
 
     private:
@@ -256,7 +254,8 @@ class ExampleLayer : public BerryFlux::Layer {
 class Sandbox : public BerryFlux::Application {
   public:
     Sandbox() {
-      PushLayer(new ExampleLayer());
+      //PushLayer(new ExampleLayer());
+      PushLayer(new Sandbox2D());
     }
 
     ~Sandbox() {

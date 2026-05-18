@@ -83,6 +83,7 @@ target_compile_options(Engine PRIVATE
 # ---------------- Sandbox ----------------
 add_executable(Sandbox
     Sandbox/src/SandboxApp.cpp
+    Sandbox/src/Sandbox2D.cpp
 )
 
 target_include_directories(Sandbox PRIVATE
@@ -96,9 +97,16 @@ target_include_directories(Sandbox PRIVATE
 #Links engine to game.
 target_link_libraries(Sandbox PRIVATE Engine ImGui)
 
-#Ensures DLL sits next to executable. Otherwise OS can’t load it at runtime.
+# Ensures DLL/shared library sits next to executable
 add_custom_command(TARGET Sandbox POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
     $<TARGET_FILE:Engine>
     $<TARGET_FILE_DIR:Sandbox>
+)
+
+# Copy assets folder beside executable
+add_custom_command(TARGET Sandbox POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/Sandbox/assets
+    ${CMAKE_BINARY_DIR}/assets
 )
