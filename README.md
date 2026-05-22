@@ -122,6 +122,7 @@ BerryFlux
 ```bash
 git clone <repo>
 cd BerryFlux
+git submodule update --init --recursive
 mkdir build
 cd build
 cmake ..
