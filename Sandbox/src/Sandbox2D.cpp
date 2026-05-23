@@ -11,7 +11,7 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 
 void Sandbox2D::OnAttach()
 {
-
+  m_CheckerboardTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/Checkerboard.png");
 }
     
 void Sandbox2D::OnDetach()
@@ -31,12 +31,16 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
   BerryFlux::Renderer2D::BeginScene(m_CameraController.GetCamera());
   //BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, -1.0f}, {0.8f, 0.8f}, {0.8f,0.2f,0.3f,1.0f});
   //BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, 1.0f}, {0.5f, 0.75f}, {0.2f,0.3f,0.8f,1.0f});
+  
   for (int i = 0; i < 10; i++){
     for (int j = 0; j < 10; j++){
       float rotation = (i + j) * 0.2f;
       BerryFlux::Renderer2D::DrawQuad({ 0.0f + i, 0.0f + j },{ 0.8f, 0.8f },rotation,{ 0.8f + i*0.1, 0.2f + j*0.1, 0.3f + (i + j)*0.1, 1.0f});
     }
   }
+
+  BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture);
+  
     
   BerryFlux::Renderer2D::EndScene();
 }

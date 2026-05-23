@@ -27,5 +27,5 @@ void main()
   //Outputing as color, first 2 components become the colro and x and y are red and green and 0 blue and 1 alpha
   //Visulaisation of data we put in vertex buffer as texture coordinates
   //FragColor = vec4(v_TexCoord, 0.0, 1.0);
-  FragColor = texture(u_Texture, v_TexCoord); //Sample the texture with the texture coordinates and output it as the fragment color
+  FragColor = texture(u_Texture, v_TexCoord * 10.0) * vec4(0.5, 0.9, 0.6, 1.0);//Sample the texture with the texture coordinates and output it as the fragment color
 }

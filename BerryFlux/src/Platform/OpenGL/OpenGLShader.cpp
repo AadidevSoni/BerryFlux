@@ -119,7 +119,7 @@ namespace BerryFlux {
         glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
         glDeleteShader(shader);// Compile the vertex shader  
         BF_CORE_ERROR("{0}",infoLog.data());
-        BF_CORE_ASSERT(false, "Shader compilation failure!")
+        BF_CORE_ASSERT(false, "Shader compilation failure!");
         break;
       }
       glAttachShader(program, shader); //Attach the compiled shader to the program
@@ -144,7 +144,7 @@ namespace BerryFlux {
       }
 
       BF_CORE_ERROR("{0}",infoLog.data());
-      BF_CORE_ASSERT(false, "Shader link failure!")
+      BF_CORE_ASSERT(false, "Shader link failure!");
       return;
     }
 
@@ -164,6 +164,11 @@ namespace BerryFlux {
   void OpenGLShader::Unbind() const 
   {
     glUseProgram(0);
+  }
+
+  void OpenGLShader::SetInt(const std::string& name, int value)
+  {
+    UploadUniformInt(name, value);
   }
 
   void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)

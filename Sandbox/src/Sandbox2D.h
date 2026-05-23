@@ -22,5 +22,7 @@ class Sandbox2D : public BerryFlux::Layer
     BerryFlux::Ref<BerryFlux::Shader> m_FlatColorShader;
     BerryFlux::Ref<BerryFlux::VertexArray> m_SquareVA;
 
+    BerryFlux::Ref<BerryFlux::Texture2D> m_CheckerboardTexture; 
+
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f}; //This is the color we will set in the shader uniform for the square
 };
