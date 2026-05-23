@@ -29,11 +29,15 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
   BerryFlux::RenderCommand::Clear();
 
   BerryFlux::Renderer2D::BeginScene(m_CameraController.GetCamera());
-  BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, 0.0f}, {1.0f, 1.0f}, {0.8f,0.2f,0.3f,1.0f});
-      
-  //std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->Bind(); //Bind the shader before setting the uniform
-  //std::dynamic_pointer_cast<BerryFlux::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
-
+  //BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, -1.0f}, {0.8f, 0.8f}, {0.8f,0.2f,0.3f,1.0f});
+  //BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, 1.0f}, {0.5f, 0.75f}, {0.2f,0.3f,0.8f,1.0f});
+  for (int i = 0; i < 10; i++){
+    for (int j = 0; j < 10; j++){
+      float rotation = (i + j) * 0.2f;
+      BerryFlux::Renderer2D::DrawQuad({ 0.0f + i, 0.0f + j },{ 0.8f, 0.8f },rotation,{ 0.8f + i*0.1, 0.2f + j*0.1, 0.3f + (i + j)*0.1, 1.0f});
+    }
+  }
+    
   BerryFlux::Renderer2D::EndScene();
 }
     
