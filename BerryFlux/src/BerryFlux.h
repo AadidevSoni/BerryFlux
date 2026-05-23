@@ -18,7 +18,9 @@
 #include "BerryFlux/Renderer/OrthographicCameraController.h"
 
 #include "BerryFlux/Renderer/Renderer.h"
+#include "BerryFlux/Renderer/Renderer2D.h"
 #include "BerryFlux/Renderer/RenderCommand.h"
+
 #include "BerryFlux/Renderer/Buffer.h"
 #include "BerryFlux/Renderer/Shader.h"
 #include "BerryFlux/Renderer/Texture.h"
