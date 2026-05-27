@@ -21,11 +21,12 @@ out vec4 FragColor;
 in vec2 v_TexCoord;
 
 uniform sampler2D u_Texture; //Uniform for the texture we will set from the application code
+uniform vec4 u_Color; //Uniform for the texture we will set from the application code
 
 void main()
 {
   //Outputing as color, first 2 components become the colro and x and y are red and green and 0 blue and 1 alpha
   //Visulaisation of data we put in vertex buffer as texture coordinates
   //FragColor = vec4(v_TexCoord, 0.0, 1.0);
-  FragColor = texture(u_Texture, v_TexCoord * 10.0) * vec4(0.5, 0.9, 0.6, 1.0);//Sample the texture with the texture coordinates and output it as the fragment color
+  FragColor = texture(u_Texture, v_TexCoord * 100.0) * u_Color;//Sample the texture with the texture coordinates and output it as the fragment color
 }

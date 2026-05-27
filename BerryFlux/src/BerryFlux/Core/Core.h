@@ -30,7 +30,17 @@ namespace BerryFlux {
 
     template<typename T> //This is a template for a unique pointer. It can be used for any type T. It is a unique pointer that can only be owned by one object at a time. It is used for resources that are not shared between objects, such as a window or a renderer.
     using Scope = std::unique_ptr<T>;
+    template<typename T, typename ... Args>
+    constexpr Scope<T> CreateScope(Args&& ... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
 
     template<typename T>
     using Ref = std::shared_ptr<T>;
+    template<typename T, typename ... Args>
+    constexpr Ref<T> CreateRef(Args&& ... args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
 }

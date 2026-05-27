@@ -11,7 +11,7 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 
 void Sandbox2D::OnAttach()
 {
-  m_CheckerboardTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/Checkerboard.png");
+  m_CheckerboardTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/checkse.png");
 }
     
 void Sandbox2D::OnDetach()

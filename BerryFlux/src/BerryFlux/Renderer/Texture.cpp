@@ -5,6 +5,17 @@
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace BerryFlux {
+
+  Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+  {
+    switch(Renderer::GetAPI()) {
+      case RendererAPI::API::None:      BF_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
+      case RendererAPI::API::OpenGL:    return CreateRef<OpenGLTexture2D>(width,height);
+    }
+
+    BF_CORE_ASSERT(false, "Unknown Renderer API!");
+    return nullptr;
+  }
   
   Ref<Texture2D> Texture2D::Create(const std::string& path)
   {
@@ -12,7 +23,7 @@ namespace BerryFlux {
     //This is the function that we will call in our application code and it will create an instance of the OpenGLTexture2D class and return it as a reference to a Texture2D object
     switch(Renderer::GetAPI()) {
       case RendererAPI::API::None:      BF_CORE_ASSERT(false, "RendererAPI::None is currently not supported"); return nullptr;
-      case RendererAPI::API::OpenGL:    return std::make_shared<OpenGLTexture2D>(path);
+      case RendererAPI::API::OpenGL:    return CreateRef<OpenGLTexture2D>(path);
     }
 
     BF_CORE_ASSERT(false, "Unknown Renderer API!");
