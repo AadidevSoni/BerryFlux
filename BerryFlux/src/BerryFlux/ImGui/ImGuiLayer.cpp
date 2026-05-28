@@ -81,10 +81,12 @@ namespace BerryFlux {
 		}
 	}
 
+	/*
   //This stays in between begin and end
   void ImGuiLayer::OnImGuiRender()
   {
     static bool show = true;
     ImGui::ShowDemoWindow(&show);
   }
+	*/
 }

@@ -11,7 +11,7 @@ namespace BerryFlux {
 
       virtual void OnAttach() override;
       virtual void OnDetach() override;
-      virtual void OnImGuiRender() override;
+      //virtual void OnImGuiRender() override;
 
       //For layers to do their own ImGui Rendering. Begin and end window renderign by different layers 
       void Begin();
