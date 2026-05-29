@@ -11,12 +11,14 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 
 void Sandbox2D::OnAttach()
 {
+  BF_PROFILE_FUNCTION();
+
   m_CheckerboardTexture = BerryFlux::Texture2D::Create("/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/checkse.png");
 }
     
 void Sandbox2D::OnDetach()
 {
-
+  BF_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
@@ -25,10 +27,7 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
   BF_PROFILE_FUNCTION(); 
 
   //Update
-  {
-    BF_PROFILE_SCOPE("CameraController::OnUpdate");
-    m_CameraController.OnUpdate(ts);
-  }
+  m_CameraController.OnUpdate(ts);
 
   //Render
   {
@@ -68,10 +67,15 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
   }
     */
 
-  BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture);
+  {
+    BF_PROFILE_SCOPE("Checker Pattern");
+    BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture);
+  }
   
-    
-  BerryFlux::Renderer2D::EndScene();
+  {
+    BF_PROFILE_SCOPE("End Scene");
+    BerryFlux::Renderer2D::EndScene();
+  }
 }
     
 void Sandbox2D::OnImGuiRender()

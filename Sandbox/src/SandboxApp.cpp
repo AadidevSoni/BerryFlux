@@ -263,6 +263,7 @@ class Sandbox : public BerryFlux::Application {
     }
 };
 //This overrides the engine factory. So EntryPoint doesn’t know about Sandbox.
-BerryFlux::Application* BerryFlux::CreateApplication() {
+BerryFlux::Application* BerryFlux::CreateApplication() 
+{
   return new Sandbox();
 }

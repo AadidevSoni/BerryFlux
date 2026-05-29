@@ -14,6 +14,8 @@ namespace BerryFlux {
 
   void OpenGLContext::Init()
   {
+    BF_PROFILE_FUNCTION(); 
+    
     //This sets the window's OpenGL context as the current rendering context.
     glfwMakeContextCurrent(m_WindowHandle);
 
@@ -29,6 +31,8 @@ namespace BerryFlux {
 
   void OpenGLContext::SwapBuffers() 
   {
+    BF_PROFILE_FUNCTION(); 
+
     glfwSwapBuffers(m_WindowHandle); //Displays the rendered frame.
   }
 

@@ -10,6 +10,8 @@ namespace BerryFlux {
 
   void Renderer::Init()
   {
+    BF_PROFILE_FUNCTION(); 
+    
     RenderCommand::Init();
     Renderer2D::Init();
   }

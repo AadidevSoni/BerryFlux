@@ -23,14 +23,21 @@ namespace BerryFlux {
   }
 
   GLFWWindow::GLFWWindow(const WindowProps& props) {
+    BF_PROFILE_FUNCTION(); 
+
     Init(props);
   }
 
-  GLFWWindow::~GLFWWindow(){
+  GLFWWindow::~GLFWWindow()
+  {
+    BF_PROFILE_FUNCTION(); 
+
     Shutdown();
   }
 
-  void GLFWWindow::Init(const WindowProps& props) {
+  void GLFWWindow::Init(const WindowProps& props) 
+  {
+    BF_PROFILE_FUNCTION(); 
 
     m_Data.Title = props.Title;
     m_Data.Width = props.Width;
@@ -40,6 +47,7 @@ namespace BerryFlux {
 
     //GLFW will only be initialized once but we can create mutliple windows
     if (!s_GLFWInitialized) {
+      BF_PROFILE_SCOPE("glfwInit");
       int success = glfwInit();
       //Assert if it fails
       BF_CORE_ASSERT(success, "could not initialize GLFW!");
@@ -53,13 +61,16 @@ namespace BerryFlux {
       s_GLFWInitialized = true;
     }
 
-    m_Window = glfwCreateWindow(
-      (int)props.Width,
-      (int)props.Height,
-      m_Data.Title.c_str(),
-      nullptr,
-      nullptr
-    );  
+    {
+      BF_PROFILE_SCOPE("glfwCreateWindow");
+      m_Window = glfwCreateWindow(
+        (int)props.Width,
+        (int)props.Height,
+        m_Data.Title.c_str(),
+        nullptr,
+        nullptr
+      ); 
+    } 
 
     //Creating and initializing the context
     m_Context = new OpenGLContext(m_Window);
@@ -84,14 +95,16 @@ namespace BerryFlux {
       data.EventCallback(event); //This calls the event callback function. So this actually becomes: Application::OnEvent(event)
     });
 
-    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) 
+    {
       WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
       WindowCloseEvent event;
       //dispatch
       data.EventCallback(event);
     });
 
-    glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+    glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) 
+    {
       WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
       switch(action) {
@@ -116,14 +129,16 @@ namespace BerryFlux {
       }
     });
     
-    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) 
+    {
       WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
       KeyTypedEvent event(keycode);
       data.EventCallback(event);
     });
 
-    glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+    glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) 
+    {
       WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
       switch(action) {
@@ -157,16 +172,25 @@ namespace BerryFlux {
     });
   }
 
-  void GLFWWindow::Shutdown() {
+  void GLFWWindow::Shutdown() 
+  {
+    BF_PROFILE_FUNCTION(); 
+
     glfwDestroyWindow(m_Window);
   }
 
-  void GLFWWindow::OnUpdate() {
+  void GLFWWindow::OnUpdate() 
+  {
+    BF_PROFILE_FUNCTION(); 
+
     glfwPollEvents();
     m_Context->SwapBuffers();
   }
 
-  void GLFWWindow::SetVSync(bool enabled) {
+  void GLFWWindow::SetVSync(bool enabled) 
+  {
+    BF_PROFILE_FUNCTION(); 
+
     if(enabled) {
       //wait for monitor refresh before swapping buffers
       glfwSwapInterval(1); //wait 1 frame to be called
@@ -177,7 +201,8 @@ namespace BerryFlux {
     m_Data.VSync = enabled;
   }
 
-  bool GLFWWindow::IsVSync() const {
+  bool GLFWWindow::IsVSync() const 
+  {
     return m_Data.VSync;
   }
 

@@ -7,6 +7,8 @@ namespace BerryFlux {
 
   void OpenGLRendererAPI::Init()
   {
+    BF_PROFILE_FUNCTION(); 
+    
     glEnable(GL_BLEND); //Enable blending for transparency
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //Set the blending function for transparency
     glEnable(GL_DEPTH_TEST);

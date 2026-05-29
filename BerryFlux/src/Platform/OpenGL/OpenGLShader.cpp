@@ -20,6 +20,8 @@ namespace BerryFlux {
 
   OpenGLShader::OpenGLShader(const std::string& filepath) 
   {
+    BF_PROFILE_FUNCTION();
+
     std::string shaderSource = ReadFile(filepath);
     //We need to separate the vertex and fragment shader source code from the shader file. We will use a simple convention where we will have a line that says #shader vertex and #shader fragment to separate the two shader source codes. We will use a stringstream to read the shader source code and separate it based on the #shader lines.
     auto shaderSources = PreProcess(shaderSource);
@@ -35,6 +37,8 @@ namespace BerryFlux {
 
   OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) 
   {
+    BF_PROFILE_FUNCTION();
+
     m_Name = name;
     std::unordered_map<GLenum, std::string> sources;
     sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -42,12 +46,17 @@ namespace BerryFlux {
     Compile(sources);
   }
 
-  OpenGLShader::~OpenGLShader() {
+  OpenGLShader::~OpenGLShader() 
+  {
+    BF_PROFILE_FUNCTION();
+
     glDeleteProgram(m_RendererID);
   }
 
   std::string OpenGLShader::ReadFile(const std::string& filepath)
   {
+    BF_PROFILE_FUNCTION();
+
     std::string result;
     std::ifstream in(filepath, std::ios::in | std::ios::binary);
     if(in) 
@@ -67,6 +76,8 @@ namespace BerryFlux {
 
   std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source) 
   {
+    BF_PROFILE_FUNCTION();
+
     std::unordered_map<GLenum, std::string> shaderSources;
 
     const char* typeToken = "#type";
@@ -92,6 +103,8 @@ namespace BerryFlux {
 
   void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
   {
+    BF_PROFILE_FUNCTION();
+
     GLuint program = glCreateProgram();
     BF_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now (vertex and fragment)");
     std::array<GLenum, 2> glShaderIDs; //This will store the shader IDs for the compiled shaders so that we can delete them after linking the program. We use an array because we only support 2 shaders for now, but we could easily change this to a vector if we wanted to support more shaders in the future.
@@ -158,30 +171,42 @@ namespace BerryFlux {
 
   void OpenGLShader::Bind() const 
   {
+    BF_PROFILE_FUNCTION();
+
     glUseProgram(m_RendererID); //This is what we do before we want to render something with this shader 
   }
 
   void OpenGLShader::Unbind() const 
   {
+    BF_PROFILE_FUNCTION();
+
     glUseProgram(0);
   }
 
   void OpenGLShader::SetInt(const std::string& name, int value)
   {
+    BF_PROFILE_FUNCTION();
+
     UploadUniformInt(name, value);
   }
 
   void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
   {
+    BF_PROFILE_FUNCTION();
+
     UploadUniformMat4(name, value);
   }
   void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
   {
+    BF_PROFILE_FUNCTION();
+
     UploadUniformFloat3(name, value);
   }
 
   void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
   {
+    BF_PROFILE_FUNCTION();
+    
     UploadUniformFloat4(name, value);
   }
 

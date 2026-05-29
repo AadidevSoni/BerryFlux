@@ -18,6 +18,8 @@ namespace BerryFlux {
 
   Application::Application() 
   {
+    BF_PROFILE_FUNCTION(); 
+
     BF_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
 
@@ -35,17 +37,26 @@ namespace BerryFlux {
 
   }
 
-  void Application::PushLayer(Layer* layer) {
+  void Application::PushLayer(Layer* layer) 
+  {
+    BF_PROFILE_FUNCTION();
+
     m_LayerStack.PushLayer(layer);
     layer->OnAttach();
   }
 
-  void Application::PushOverlay(Layer* layer) {
+  void Application::PushOverlay(Layer* layer) 
+  {
+    BF_PROFILE_FUNCTION();
+    
     m_LayerStack.PushOverlay(layer);
     layer->OnAttach();
   }
 
-  void Application::OnEvent(Event& e) {
+  void Application::OnEvent(Event& e) 
+  {
+    BF_PROFILE_FUNCTION();
+
     EventDispatcher dispatcher(e);
     //If the event is a WindowCloseEvent, call OnWindowClose()
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose)); //If the Event e is a window close event
@@ -62,8 +73,12 @@ namespace BerryFlux {
     }
   }
 
-  void Application::Run() {
+  void Application::Run() 
+  {
+    BF_PROFILE_FUNCTION();
+
     while(m_Running) {
+      BF_PROFILE_SCOPE("RunLoop");
 
       float time = (float)glfwGetTime();
       Timestep timestep = time - m_LastFrameTime;
@@ -73,32 +88,43 @@ namespace BerryFlux {
       RenderCommand::Clear();
 
       if(!m_Minimized) {
-        for(Layer* layer: m_LayerStack) {
-          layer->OnUpdate(timestep);
+        {
+          BF_PROFILE_SCOPE("LayerStack OnUpdates");
+
+          for(Layer* layer: m_LayerStack) {
+            layer->OnUpdate(timestep);
+          }
         }
-      }
+        //Testing out Input Polling
+        //auto[x,y] = Input::GetMousePosition();
+        //BF_CORE_TRACE("{0}, {1}",x,y);
 
-      //Testing out Input Polling
-      //auto[x,y] = Input::GetMousePosition();
-      //BF_CORE_TRACE("{0}, {1}",x,y);
-
-      m_ImGuiLayer->Begin();
-      for(Layer* layer: m_LayerStack) {
-        layer->OnImGuiRender();
+        m_ImGuiLayer->Begin();
+        {
+          BF_PROFILE_SCOPE("LayerStack OnImGuiRenderer");
+          for(Layer* layer: m_LayerStack) {
+            layer->OnImGuiRender();
+          }
+        }
+        m_ImGuiLayer->End();
       }
-      m_ImGuiLayer->End();
 
       m_Window->OnUpdate();
     }
   }
 
-  bool Application::OnWindowClose(WindowCloseEvent& e) {
+  bool Application::OnWindowClose(WindowCloseEvent& e) 
+  {
+    BF_PROFILE_FUNCTION();
+
     m_Running = false;
     return true;
   }
 
-  bool Application::OnWindowResize(WindowResizeEvent& e) {
-    
+  bool Application::OnWindowResize(WindowResizeEvent& e) 
+  {
+    BF_PROFILE_FUNCTION();
+     
     if(e.GetWidth() == 0 || e.GetHeight() == 0)
     {
       m_Minimized = true;

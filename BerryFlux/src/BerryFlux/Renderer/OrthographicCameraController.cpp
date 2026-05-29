@@ -14,6 +14,8 @@ namespace BerryFlux {
 
   void OrthographicCameraController::OnUpdate(Timestep ts)
   {
+    BF_PROFILE_FUNCTION();
+
     if(Input::IsKeyPressed(BF_KEY_LEFT))
     {
       m_CameraPosition.x -= m_CameraTranslationSpeed * ts; 
@@ -49,6 +51,8 @@ namespace BerryFlux {
 
   void OrthographicCameraController::OnEvent(Event& e) 
   {
+    BF_PROFILE_FUNCTION();
+
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseScrolledEvent>(BF_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
     dispatcher.Dispatch<WindowResizeEvent>(BF_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -56,6 +60,8 @@ namespace BerryFlux {
   
   bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
   {
+    BF_PROFILE_FUNCTION();
+
     m_ZoomLevel -= e.GetYOffset() * 0.5f;
     m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
     //Recompute everything just mofidy the zoomlevel value
@@ -66,6 +72,8 @@ namespace BerryFlux {
 
   bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e) 
   {
+    BF_PROFILE_FUNCTION();
+    
     m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
     RenderCommand::SetViewport(0, 0, e.GetWidth(), e.GetHeight());
     //modify the aspect ratio value

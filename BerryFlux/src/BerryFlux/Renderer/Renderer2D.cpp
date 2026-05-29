@@ -18,6 +18,8 @@ namespace BerryFlux {
 
   void Renderer2D::Init()
   {
+    BF_PROFILE_FUNCTION(); 
+
     s_Data = new Renderer2DStorage();
 
     s_Data->QuadVertexArray = VertexArray::Create();
@@ -55,29 +57,37 @@ namespace BerryFlux {
 
   void Renderer2D::Shutdown()
   {
+    BF_PROFILE_FUNCTION();
+
     delete s_Data; 
   }
 
   void Renderer2D::BeginScene(const OrthographicCamera& camera)
   {
+    BF_PROFILE_FUNCTION();
+
     s_Data->TextureShader->Bind(); //Bind the shader before setting the uniform
     s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
   }
 
   void Renderer2D::EndScene()
   {
-
+    BF_PROFILE_FUNCTION();
   }
 
   //No Rotation No Texture
 
   void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
   {
+    BF_PROFILE_FUNCTION();
+
     DrawQuad({position.x, position.y, 0.0f},size,color);
   }
 
   void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
   {
+    BF_PROFILE_FUNCTION();
+
     s_Data->TextureShader->SetFloat4("u_Color", color);
     //Bind white texture 
     s_Data->WhiteTexture->Bind();
@@ -94,11 +104,15 @@ namespace BerryFlux {
 
   void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
   {
+    BF_PROFILE_FUNCTION();
+
     DrawQuad({position.x, position.y, 0.0f},size,rotation,color);
   }
 
   void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
   {
+    BF_PROFILE_FUNCTION();
+
     s_Data->TextureShader->SetFloat4("u_Color", color);
     //Bind white texture 
     s_Data->WhiteTexture->Bind();
@@ -116,11 +130,15 @@ namespace BerryFlux {
 
   void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
   {
+    BF_PROFILE_FUNCTION();
+
     DrawQuad({position.x, position.y, 0.0f},size,texture);
   }
 
   void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
   {
+    BF_PROFILE_FUNCTION();
+
     s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f)); //We still have to bind a color or else it will remain as the previous color used so we make it pure white which makes no change to the original texture.
     texture->Bind();
 
@@ -136,11 +154,15 @@ namespace BerryFlux {
 
   void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture)
   {
+    BF_PROFILE_FUNCTION();
+
     DrawQuad({position.x, position.y, 0.0f},size,rotation,texture);
   }
 
   void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture)
   {
+    BF_PROFILE_FUNCTION();
+    
     s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
     texture->Bind();
 

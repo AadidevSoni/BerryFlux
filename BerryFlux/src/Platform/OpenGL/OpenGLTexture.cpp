@@ -8,6 +8,8 @@ namespace BerryFlux {
   OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
     : m_Width(width), m_Height(height)
   {
+    BF_PROFILE_FUNCTION(); 
+
     m_InternalFormat = GL_RGBA8;
     m_DataFormat = GL_RGBA;
 
@@ -35,11 +37,19 @@ namespace BerryFlux {
 
   OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path)
   { 
+    BF_PROFILE_FUNCTION(); 
+
     BF_CORE_WARN("Loading texture from: {0}", path);
 
     stbi_set_flip_vertically_on_load(1);
     int width, height, channels;
-    stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+    stbi_uc* data = nullptr;
+    //Loading Texture
+    {
+      BF_PROFILE_SCOPE("stbi_load - OpenGLTexture2D::OpenGLTexture2D(const std::string&)");
+      data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+    }
+
     //Assert if the data is null, meaning the image failed to load
     if (!data)
     {
@@ -116,6 +126,8 @@ namespace BerryFlux {
 
   void OpenGLTexture2D::SetData(void* data, uint32_t size)
   {
+    BF_PROFILE_FUNCTION(); 
+
     uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 
     BF_CORE_ASSERT(size == m_Width * m_Height * bpp,
@@ -138,11 +150,15 @@ namespace BerryFlux {
 
   OpenGLTexture2D::~OpenGLTexture2D() 
   {
+    BF_PROFILE_FUNCTION(); 
+
     glDeleteTextures(1, &m_RendererID); //Delete the texture from the GPU when the texture object is destroyed
   }
 
   void OpenGLTexture2D::Bind(uint32_t slot) const 
   {
+    BF_PROFILE_FUNCTION(); 
+
     //To bind more than one texture at once 
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, m_RendererID); //Bind the texture to the GPU so it can be used in the shader
