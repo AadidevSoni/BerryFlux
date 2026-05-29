@@ -24,13 +24,5 @@ class Sandbox2D : public BerryFlux::Layer
 
     BerryFlux::Ref<BerryFlux::Texture2D> m_CheckerboardTexture; 
 
-    struct ProfileResult
-    {
-      const char* Name;
-      float Time;
-    };
-
-    std::vector<ProfileResult> m_ProfileResults;
-
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f}; //This is the color we will set in the shader uniform for the square
 };

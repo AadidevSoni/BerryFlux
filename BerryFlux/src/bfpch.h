@@ -16,6 +16,7 @@
 #include <unordered_set>
 
 #include "BerryFlux/Core/Log.h"
+#include "BerryFlux/Debug/Instrumentor.h"
 
 #if defined(_WIN32) || defined(_WIN64)
   #include <Windows.h>

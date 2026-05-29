@@ -15,7 +15,15 @@ int main(int argc, char** argv)
   int a = 10;
   BF_INFO("Initialized Client Log! Var={0}",10);
 
+  BF_PROFILE_BEGIN_SESSION("Startup", "../Sandbox/BerryFluxProfile-Startup.json");
   auto app = BerryFlux::CreateApplication();
+  BF_PROFILE_END_SESSION();
+
+  BF_PROFILE_BEGIN_SESSION("Runtime", "../Sandbox/BerryFluxProfile-Runtime.json");
   app->Run();
+  BF_PROFILE_END_SESSION();
+
+  BF_PROFILE_BEGIN_SESSION("Shutdown", "../Sandbox/BerryFluxProfile-Shutdown.json");;
   delete app;
+  BF_PROFILE_END_SESSION();
 }
