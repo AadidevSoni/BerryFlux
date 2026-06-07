@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "imgui.h"
 #include "Sandbox2D.h"
+#include "GameLayer.h"
 
 class ExampleLayer : public BerryFlux::Layer {
   public:
@@ -255,7 +256,8 @@ class Sandbox : public BerryFlux::Application {
   public:
     Sandbox() {
       //PushLayer(new ExampleLayer());
-      PushLayer(new Sandbox2D());
+      //PushLayer(new Sandbox2D());
+      PushLayer(new GameLayer());
     }
 
     ~Sandbox() {

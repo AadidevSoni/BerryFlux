@@ -85,6 +85,11 @@ target_compile_options(Engine PRIVATE
 add_executable(Sandbox
     Sandbox/src/SandboxApp.cpp
     Sandbox/src/Sandbox2D.cpp
+    Sandbox/src/GameLayer.cpp 
+    Sandbox/src/Random.cpp
+    Sandbox/src/Level.cpp 
+    Sandbox/src/Player.cpp
+    Sandbox/src/ParticleSystem.cpp
 )
 
 target_include_directories(Sandbox PRIVATE

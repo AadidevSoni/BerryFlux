@@ -7,18 +7,22 @@ uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
 
 out vec2 v_TexCoord;
+out vec2 v_ScreenPos;
 
 void main()
 { 
-  v_TexCoord = aTexCoord;
-  gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0);
+	v_TexCoord = aTexCoord;
+  gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0); 
+	v_ScreenPos = gl_Position.xy;
 }
 
 #type fragment
-#version 410 core
-out vec4 FragColor;
+#version 330 core
+
+layout(location = 0) out vec4 color;
 
 in vec2 v_TexCoord;
+in vec2 v_ScreenPos;
 
 uniform sampler2D u_Texture; //Uniform for the texture we will set from the application code
 uniform vec4 u_Color; //Uniform for the texture we will set from the application code
@@ -28,5 +32,9 @@ void main()
   //Outputing as color, first 2 components become the colro and x and y are red and green and 0 blue and 1 alpha
   //Visulaisation of data we put in vertex buffer as texture coordinates
   //FragColor = vec4(v_TexCoord, 0.0, 1.0);
-  FragColor = texture(u_Texture, v_TexCoord * 100.0) * u_Color;//Sample the texture with the texture coordinates and output it as the fragment color
+  //FragColor = texture(u_Texture, v_TexCoord * 100.0) * u_Color;//Sample the texture with the texture coordinates and output it as the fragment color
+  //float dist = 1.0f - distance(v_ScreenPos * 0.8f, vec2(0.0f));
+	//dist = clamp(dist, 0.0f, 1.0f);
+	//dist = sqrt(dist);
+	color = texture(u_Texture, v_TexCoord) * u_Color; //* dist
 }
