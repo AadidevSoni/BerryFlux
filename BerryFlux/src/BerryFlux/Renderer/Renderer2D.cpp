@@ -77,18 +77,19 @@ namespace BerryFlux {
 
   //No Rotation No Texture
 
-  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
+  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color, float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
-    DrawQuad({position.x, position.y, 0.0f},size,color);
+    DrawQuad({position.x, position.y, 0.0f},size,color,tilingFactor);
   }
 
-  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
     s_Data->TextureShader->SetFloat4("u_Color", color);
+    s_Data->TextureShader->SetFloat("u_TilingFactor", tilingFactor); 
     //Bind white texture 
     s_Data->WhiteTexture->Bind();
 
@@ -102,18 +103,19 @@ namespace BerryFlux {
 
   //Rotation No Texture
 
-  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color,float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
-    DrawQuad({position.x, position.y, 0.0f},size,rotation,color);
+    DrawQuad({position.x, position.y, 0.0f},size,rotation,color,tilingFactor);
   }
 
-  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color)
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color,float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
     s_Data->TextureShader->SetFloat4("u_Color", color);
+    s_Data->TextureShader->SetFloat("u_TilingFactor", tilingFactor); 
     //Bind white texture 
     s_Data->WhiteTexture->Bind();
 
@@ -128,36 +130,38 @@ namespace BerryFlux {
 
   //No Rotation Texture
 
-  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
-    DrawQuad({position.x, position.y, 0.0f},size,texture);
+    DrawQuad({position.x, position.y, 0.0f},size,texture,tilingFactor);
   }
 
-  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor)
   {
     BF_PROFILE_FUNCTION();
 
     s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f)); //We still have to bind a color or else it will remain as the previous color used so we make it pure white which makes no change to the original texture.
+    s_Data->TextureShader->SetFloat("u_TilingFactor", tilingFactor); 
     texture->Bind();
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) //identity matrix that we start off with to position
       * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f}); 
     s_Data->TextureShader->SetMat4("u_Transform", transform); 
 
-    s_Data->QuadVertexArray->Bind();
+    s_Data->QuadVertexArray->Bind(); 
     RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
   }
 
-  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color)
+  void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
 	{
-		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture, color);
+		DrawQuad({ position.x, position.y, 0.0f }, size, rotation, texture, color,tilingFactor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color)
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec4& color, float tilingFactor)
 	{
 		s_Data->TextureShader->SetFloat4("u_Color", color);
+    s_Data->TextureShader->SetFloat("u_TilingFactor", tilingFactor); 
 		texture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)

@@ -69,8 +69,16 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
 
   {
     BF_PROFILE_SCOPE("Checker Pattern");
-    BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture);
+    BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture, 10.0f);
   }
+
+  //Rotated quad
+  BerryFlux::Renderer2D::DrawQuad(
+      {0.0f, 3.0f, 0.0f},
+      {2.0f, 2.0f},
+      glm::radians(45.0f),
+      {0.4f, 0.8f, 0.5f, 1.0f}
+  );
   
   {
     BF_PROFILE_SCOPE("End Scene");
