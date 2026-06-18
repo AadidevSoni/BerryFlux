@@ -22,8 +22,8 @@ class ExampleLayer : public BerryFlux::Layer {
         0.0f, 0.5f, 0.0f, 0.3f, 0.0f, 1.0f, 1.0f
       };
  
-      BerryFlux::Ref<BerryFlux::VertexBuffer> vertexBuffer;
-      vertexBuffer.reset(BerryFlux::VertexBuffer::Create(vertices, sizeof(vertices)));
+      BerryFlux::Ref<BerryFlux::VertexBuffer> vertexBuffer =
+      BerryFlux::VertexBuffer::Create(vertices, sizeof(vertices));
 
       //To make layout not be directly accessible instead get it from the GetLayout
       {
@@ -37,8 +37,7 @@ class ExampleLayer : public BerryFlux::Layer {
       m_VertexArray->AddVertexBuffer(vertexBuffer);
 
       uint32_t indices[3] = {0,1,2};
-      BerryFlux::Ref<BerryFlux::IndexBuffer> indexBuffer;
-      indexBuffer.reset(BerryFlux::IndexBuffer::Create(indices, sizeof(indices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
+      auto indexBuffer = BerryFlux::IndexBuffer::Create(indices,sizeof(indices) / sizeof(uint32_t)); //passing as number as it is count of indices not size in bytes
       m_VertexArray->SetIndexBuffer(indexBuffer);
 
       m_SquareVA = BerryFlux::VertexArray::Create();
@@ -50,20 +49,18 @@ class ExampleLayer : public BerryFlux::Layer {
         -0.5f, 0.5f, 0.0f, 0.0f, 1.0f //If negative then 0 else positive and these are the 4 corners
       };
 
-      BerryFlux::Ref<BerryFlux::VertexBuffer> squareVB;
-      squareVB.reset(BerryFlux::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+      auto quadVB = BerryFlux::VertexBuffer::Create(squareVertices,sizeof(squareVertices));
 
-      BerryFlux::BufferLayout squareVBLayout = {
+      BerryFlux::BufferLayout quadVBLayout = {
           {BerryFlux::ShaderDataType::Float3, "aPos", true},
           {BerryFlux::ShaderDataType::Float2, "aTexCoord", true}
         };
-      squareVB->SetLayout(squareVBLayout);
-      m_SquareVA->AddVertexBuffer(squareVB);
+      quadVB->SetLayout(quadVBLayout);
+      m_SquareVA->AddVertexBuffer(quadVB);
 
       uint32_t squareIndices[6] = {0,1,2,2,3,0};
-      BerryFlux::Ref<BerryFlux::IndexBuffer> squareIB;
-      squareIB.reset(BerryFlux::IndexBuffer::Create(squareIndices, sizeof(squareIndices)/sizeof(uint32_t))); //passing as number as it is count of indices not size in bytes
-      m_SquareVA->SetIndexBuffer(squareIB);
+      auto quadIB = BerryFlux::IndexBuffer::Create(squareIndices, sizeof(squareIndices)/sizeof(uint32_t)); //passing as number as it is count of indices not size in bytes
+      m_SquareVA->SetIndexBuffer(quadIB);
 
       //Shader program
       std::string vertexSrc = R"(

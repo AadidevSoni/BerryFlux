@@ -1,19 +1,19 @@
 #type vertex
 #version 410 core
 layout(location = 0) in vec3 aPos;
-layout(location = 1) in vec2 aTexCoord;
+layout(location = 1) in vec4 aColor;
+layout(location = 2) in vec2 aTexCoord;
 
-uniform mat4 u_ViewProjection;
-uniform mat4 u_Transform;
+uniform mat4 u_ViewProjection; 
 
+out vec4 v_Color;
 out vec2 v_TexCoord;
-out vec2 v_ScreenPos;
 
 void main()
 { 
 	v_TexCoord = aTexCoord;
-  gl_Position = u_ViewProjection * u_Transform * vec4(aPos, 1.0); 
-	v_ScreenPos = gl_Position.xy;
+  v_Color = aColor;
+  gl_Position = u_ViewProjection * vec4(aPos, 1.0); 
 }
 
 #type fragment
@@ -21,11 +21,11 @@ void main()
 
 layout(location = 0) out vec4 color;
 
+in vec4 v_Color;
 in vec2 v_TexCoord;
-in vec2 v_ScreenPos;
 
 uniform sampler2D u_Texture; //Uniform for the texture we will set from the application code
-uniform vec4 u_Color; //Uniform for the texture we will set from the application code
+//uniform vec4 u_Color; //Uniform for the texture we will set from the application code
 uniform float u_TilingFactor;
 
 void main()
@@ -37,5 +37,6 @@ void main()
   //float dist = 1.0f - distance(v_ScreenPos * 0.8f, vec2(0.0f));
 	//dist = clamp(dist, 0.0f, 1.0f);
 	//dist = sqrt(dist);
-	color = texture(u_Texture, v_TexCoord * u_TilingFactor) * u_Color; //* dist
+	//color = texture(u_Texture, v_TexCoord * u_TilingFactor) * u_Color; //* dist
+  color = v_Color;
 }

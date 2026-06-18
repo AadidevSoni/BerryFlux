@@ -37,51 +37,23 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts)
   }
 
   {
-    BF_PROFILE_SCOPE("Begin Scene");
+    BF_PROFILE_SCOPE("Renderer Draw");
     BerryFlux::Renderer2D::BeginScene(m_CameraController.GetCamera());
-  }
-
-  {
-    BF_PROFILE_SCOPE("Draw Quad 1");
-    BerryFlux::Renderer2D::DrawQuad(
-      {-0.5f, 0.0f, 0.0f},
-      {0.8f, 0.8f},
-      {0.8f,0.9f,0.3f,1.0f}
-    );
-  }
-
-  {
-    BF_PROFILE_SCOPE("Draw Quad 2");
-    BerryFlux::Renderer2D::DrawQuad(
-      {0.5f, 1.0f, 0.0f},
-      {0.3f, 0.8f},
-      {0.2f,0.9f,0.8f,1.0f}
-    );
-  }
-  /*
-  for (int i = 0; i < 10; i++){
-    for (int j = 0; j < 10; j++){
-      float rotation = (i + j) * 0.2f;
-      BerryFlux::Renderer2D::DrawQuad({ 0.0f + i, 0.0f + j },{ 0.8f, 0.8f },rotation,{ 0.8f + i*0.1, 0.2f + j*0.1, 0.3f + (i + j)*0.1, 1.0f});
-    }
-  }
+    BerryFlux::Renderer2D::DrawQuad({-0.5f, 0.0f, 0.0f},{0.8f, 0.8f},{1.0f,0.0f,0.0f,1.0f});
+    BerryFlux::Renderer2D::DrawQuad({0.5f, 1.0f, 0.0f},{0.3f, 0.8f},{0.0f,1.0f,0.0f,1.0f});
+    BerryFlux::Renderer2D::DrawQuad({0.5f, -1.0f, 0.0f},{0.8f, 0.2f},{0.0f,0.0f,1.0f,1.0f});
+    /*
+    for (int i = 0; i < 10; i++){
+        for (int j = 0; j < 10; j++){
+          float rotation = (i + j) * 0.2f;
+          BerryFlux::Renderer2D::DrawQuad({ 0.0f + i, 0.0f + j },{ 0.8f, 0.8f },rotation,{ 0.8f + i*0.1, 0.2f + j*0.1, 0.3f + (i + j)*0.1, 1.0f});
+        }
+      }
     */
-
-  {
-    BF_PROFILE_SCOPE("Checker Pattern");
-    BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture, 10.0f);
-  }
-
-  //Rotated quad
-  BerryFlux::Renderer2D::DrawQuad(
-      {0.0f, 3.0f, 0.0f},
-      {2.0f, 2.0f},
-      glm::radians(45.0f),
-      {0.4f, 0.8f, 0.5f, 1.0f}
-  );
-  
-  {
-    BF_PROFILE_SCOPE("End Scene");
+    //Checker Pattern
+    //BerryFlux::Renderer2D::DrawQuad({0.2f, 0.f,-0.1f}, {100.0f, 100.0f}, m_CheckerboardTexture, 10.0f);
+    //Rotated quad
+    //BerryFlux::Renderer2D::DrawQuad({0.0f, 3.0f, 0.0f},{2.0f, 2.0f},glm::radians(45.0f),{0.4f, 0.8f, 0.5f, 1.0f});
     BerryFlux::Renderer2D::EndScene();
   }
 }
