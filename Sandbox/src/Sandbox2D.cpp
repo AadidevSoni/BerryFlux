@@ -1,4 +1,5 @@
 #include "Sandbox2D.h"
+#include "BerryFlux/Renderer/Renderer2D.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "imgui.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -21,10 +22,14 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts) {
   // Timer
   BF_PROFILE_FUNCTION();
 
+  // Reset stats
+  BerryFlux::Renderer2D::ResetStats();
+
   // Update
   m_CameraController.OnUpdate(ts);
 
   // Render
+  BerryFlux::Renderer2D();
   {
     BF_PROFILE_SCOPE("Renderer Prep");
     BerryFlux::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
@@ -34,11 +39,11 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts) {
   {
     BF_PROFILE_SCOPE("Renderer Draw");
     BerryFlux::Renderer2D::BeginScene(m_CameraController.GetCamera());
-    BerryFlux::Renderer2D::DrawQuad({-0.5f, 0.0f, 0.0f}, {0.8f, 0.8f},
+    BerryFlux::Renderer2D::DrawQuad({-0.5f, 0.0f, 0.2f}, {0.8f, 0.8f},
                                     {1.0f, 0.0f, 0.0f, 1.0f});
-    BerryFlux::Renderer2D::DrawQuad({0.5f, 1.0f, 0.0f}, {0.3f, 0.8f},
+    BerryFlux::Renderer2D::DrawQuad({0.5f, 1.0f, 0.2f}, {0.3f, 0.8f},
                                     {0.0f, 1.0f, 0.0f, 1.0f});
-    BerryFlux::Renderer2D::DrawQuad({0.5f, -1.0f, 0.0f}, {0.8f, 0.2f},
+    BerryFlux::Renderer2D::DrawQuad({0.5f, -1.0f, 0.2f}, {0.8f, 0.2f},
                                     {0.0f, 0.0f, 1.0f, 1.0f});
     /*
     for (int i = 0; i < 10; i++){
@@ -50,7 +55,7 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts) {
       }
     */
     // Checker Pattern
-    BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f},
+    BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {20.0f, 20.0f},
                                     m_CheckerboardTexture, 10.0f);
 
     // Rotation Animation
@@ -58,11 +63,21 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts) {
     rotation += ts * 20.0f;
 
     // Rotated Texture
-    BerryFlux::Renderer2D::DrawQuad({1.5f, 0.0f, 0.1f}, {1.0f, 1.0f}, rotation,
+    BerryFlux::Renderer2D::DrawQuad({1.5f, 0.0f, 0.2f}, {1.0f, 1.0f}, rotation,
                                     m_CheckerboardTexture, 20.0f);
     // Rotated quad
-    BerryFlux::Renderer2D::DrawQuad({0.0f, 2.0f, 0.0f}, {1.0f, 1.0f}, 45.0f,
+    BerryFlux::Renderer2D::DrawQuad({0.0f, 2.0f, 0.2f}, {1.0f, 1.0f}, 45.0f,
                                     {0.4f, 0.8f, 0.5f, 1.0f});
+    BerryFlux::Renderer2D::EndScene();
+
+    // New Scene
+    BerryFlux::Renderer2D::BeginScene(m_CameraController.GetCamera());
+    for (float y = -5.0f; y < 5.0f; y += 0.3f) {
+      for (float x = -5.0f; x < 5.0f; x += 0.3f) {
+        glm::vec4 color = {(x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.5f};
+        BerryFlux::Renderer2D::DrawQuad({x, y, 0.1f}, {0.45f, 0.45f}, color);
+      }
+    }
     BerryFlux::Renderer2D::EndScene();
   }
 }
@@ -75,6 +90,12 @@ void Sandbox2D::OnImGuiRender() {
       "Square Color",
       glm::value_ptr(m_SquareColor)); // This creates a color picker in the
                                       // ImGui window for the square color
+  auto stats = BerryFlux::Renderer2D::GetStats();
+  ImGui::Text("Renderer 2D Stats:");
+  ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+  ImGui::Text("Quad Count: %d", stats.QuadCount);
+  ImGui::Text("VertexCount: %d", stats.GetTotalVertexCount());
+  ImGui::Text("Index Count: %d", stats.GetTotalIndexCount());
 
   ImGui::End();
 }
