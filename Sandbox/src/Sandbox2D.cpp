@@ -50,11 +50,19 @@ void Sandbox2D::OnUpdate(BerryFlux::Timestep ts) {
       }
     */
     // Checker Pattern
-    BerryFlux::Renderer2D::DrawQuad({-5.0f, -5.0f, -0.1f}, {10.0f, 10.0f},
+    BerryFlux::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f},
                                     m_CheckerboardTexture, 10.0f);
+
+    // Rotation Animation
+    static float rotation = 0.0f;
+    rotation += ts * 20.0f;
+
+    // Rotated Texture
+    BerryFlux::Renderer2D::DrawQuad({1.5f, 0.0f, 0.1f}, {1.0f, 1.0f}, rotation,
+                                    m_CheckerboardTexture, 20.0f);
     // Rotated quad
-    // BerryFlux::Renderer2D::DrawQuad({0.0f, 3.0f,
-    // 0.0f},{2.0f, 2.0f},glm::radians(45.0f),{0.4f, 0.8f, 0.5f, 1.0f});
+    BerryFlux::Renderer2D::DrawQuad({0.0f, 2.0f, 0.0f}, {1.0f, 1.0f}, 45.0f,
+                                    {0.4f, 0.8f, 0.5f, 1.0f});
     BerryFlux::Renderer2D::EndScene();
   }
 }
