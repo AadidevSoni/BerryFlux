@@ -11,9 +11,8 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach() {
   BF_PROFILE_FUNCTION();
 
-  m_CheckerboardTexture = BerryFlux::Texture2D::Create(
-      "/Users/aadidev/Desktop/GameEngineDev/BerryFlux/Sandbox/assets/textures/"
-      "checkse.png");
+  m_CheckerboardTexture =
+      BerryFlux::Texture2D::Create("Sandbox/assets/textures/checkse.png");
 }
 
 void Sandbox2D::OnDetach() { BF_PROFILE_FUNCTION(); }

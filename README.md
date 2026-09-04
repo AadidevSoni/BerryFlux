@@ -162,7 +162,7 @@ Renderer2D::EndScene();
 Shaders are loaded from `.glsl` asset files, stored in a `ShaderLibrary`, and addressed by name. Uniforms are set through a high-level API — no raw OpenGL in your game code.
 
 ```cpp
-auto shader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
+auto shader = m_ShaderLibrary.Load("Sandbox/assets/shaders/Texture.glsl");
 shader->SetFloat4("u_Color", glm::vec4(1.0f, 0.5f, 0.2f, 1.0f));
 shader->SetMat4("u_Transform", transform);
 ```
